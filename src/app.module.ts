@@ -8,6 +8,7 @@ import { MailModule } from './entities/mail/mail.module';
 import { UploadModule } from './entities/upload/upload.module';
 import { UsersModule } from './entities/users/users.module';
 import { CorsMiddleware } from './middleware/cors-middleware';
+import { FirebaseModule } from './entities/firebase/firebase.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { CorsMiddleware } from './middleware/cors-middleware';
     UploadModule,
     MailModule,
     GoogleModule,
+    FirebaseModule,
   ],
   controllers: [],
   providers: [],

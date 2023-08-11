@@ -1,9 +1,12 @@
+import { initializeFirebaseApp } from '@entities/firebase/firebase.config';
 import { UploadDto } from '@entities/upload/dto/upload.dto';
 import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import cookieParser from 'cookie-parser';
 import { AppModule } from './app.module';
+
+initializeFirebaseApp();
 
 async function bootstrap() {
   const PORT = process.env.PORT || 3000;
