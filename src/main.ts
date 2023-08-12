@@ -3,7 +3,7 @@ import { UploadDto } from '@entities/upload/dto/upload.dto';
 import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import cookieParser from 'cookie-parser';
+import * as cookieParser from 'cookie-parser';
 import { AppModule } from './app.module';
 
 initializeFirebaseApp();
@@ -12,7 +12,7 @@ async function bootstrap() {
   const PORT = process.env.PORT || 3000;
   const app = await NestFactory.create(AppModule);
   const config = new DocumentBuilder()
-    .setTitle('Internship Testing API')
+    .setTitle('Create Resume API')
     .setDescription('Documentation REST API')
     .setVersion('1.0.0')
     .addServer(process.env.BASE_URL)
