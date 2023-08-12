@@ -1,4 +1,4 @@
-import { initializeApp } from 'firebase-admin/app';
+import { initializeApp } from '@firebase/app';
 
 export function initializeFirebaseApp() {
   const serviceAccount = {
