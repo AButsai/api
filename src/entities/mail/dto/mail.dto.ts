@@ -1,12 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import * as regex from '@utils/regex-expressions';
-import {
-  IsEmail,
-  IsNotEmpty,
-  IsString,
-  Matches,
-  MinLength,
-} from 'class-validator';
+import { IsEmail, IsString } from 'class-validator';
 
 export class EmailDto {
   @ApiProperty({

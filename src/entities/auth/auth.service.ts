@@ -40,7 +40,11 @@ export class AuthService {
     }
     const hashedPassword = await bcryptjs.hash(password, 10);
     const verifyToken = v4();
-    await this.mailService.sendEmailHandler(email, verifyToken);
+    await this.mailService.sendEmailHandler(
+      email,
+      verifyToken,
+      'mail/verify-email',
+    );
 
     const role = this.roleRepository.create({
       role: ERole.USER,

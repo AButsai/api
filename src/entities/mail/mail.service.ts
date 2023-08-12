@@ -41,10 +41,11 @@ export class MailService {
   public async sendEmailHandler(
     email: string,
     verifyToken: string,
+    path: string,
     firstName?: string,
   ) {
     const name = firstName ? firstName : email;
-    const linkForEmail = this.generateUrlForEmailSend(email, verifyToken);
+    const linkForEmail = this.generateUrlForEmailSend(email, verifyToken, path);
     await this.sendEmail(email, linkForEmail, name);
 
     return true;
@@ -67,9 +68,13 @@ export class MailService {
   }
 
   // Resend email
-  public async resendEmail(email: string) {
+  public async resendEmail(email: string, path = 'mail/verify-email') {
     const user = await this.userRepository.findOne({ where: { email } });
-    const linkForEmail = this.generateUrlForEmailSend(email, user.verifyToken);
+    const linkForEmail = this.generateUrlForEmailSend(
+      email,
+      user.verifyToken,
+      path,
+    );
     const name = user.firstName ? user.firstName : email;
     await this.sendEmail(email, linkForEmail, name);
 
@@ -77,8 +82,12 @@ export class MailService {
   }
 
   // Generate url for email send
-  private generateUrlForEmailSend(name: string, verifyToken: string) {
-    return `<p>Hi ${name}, please confirm that this is your email address</p><a href="${process.env.BASE_URL}/api/mail/verify-email/${verifyToken}">Confirm email</a>`;
+  private generateUrlForEmailSend(
+    name: string,
+    verifyToken: string,
+    path: string,
+  ) {
+    return `<p>Hi ${name}, please confirm that this is your email address</p><a href="${process.env.BASE_URL}/api/${path}/${verifyToken}">Confirm email</a>`;
   }
 
   // Send email
