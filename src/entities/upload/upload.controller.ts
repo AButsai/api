@@ -21,6 +21,7 @@ import {
   ApiPayloadTooLargeResponse,
   ApiResponse,
   ApiTags,
+  ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
 import { MyRequest } from '@src/types/request.interface';
 import { multerOptions } from './config/multer.config';
@@ -46,6 +47,10 @@ export class UploadController {
   @ApiBody({
     description: 'File to upload',
     type: UploadDto,
+  })
+  @ApiUnauthorizedResponse({
+    description:
+      'Not authorized jwt expired || Not authorized Invalid token type',
   })
   @ApiNotFoundResponse({ description: 'Not found' })
   @ApiPayloadTooLargeResponse({ description: 'File too large' })
