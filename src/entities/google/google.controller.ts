@@ -37,8 +37,7 @@ export class GoogleController {
     description: 'User data encoded in URL',
     type: 'string',
     required: true,
-    example:
-      '{successToken: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..., user: {id: 1, ...}}',
+    example: 'userData={successToken: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...}',
   })
   @ApiResponse({ status: 200, type: AuthResponseDto })
   @ApiNotFoundResponse({ description: 'Not found' })

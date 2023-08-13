@@ -22,7 +22,7 @@ import {
 } from '@nestjs/swagger';
 import { MyRequest } from '@src/types/request.interface';
 import { AuthService } from './auth.service';
-import { AuthDto, AuthResponseDto } from './dto/auth.dto';
+import { AuthDto, AuthResponseDto, LogoutResponseDto } from './dto/auth.dto';
 
 @ApiTags('Authentication')
 @Controller('api/auth')
@@ -58,15 +58,16 @@ export class AuthController {
   @ApiBearerAuth()
   @ApiHeader({
     name: 'Authorization',
-    description: 'Refresh token from cookie',
+    description: 'Bearer token',
     required: true,
   })
-  @ApiOkResponse({ type: '' })
+  @ApiOkResponse({ type: LogoutResponseDto })
   @ApiNotFoundResponse({ description: 'Not found error' })
   @ApiInternalServerErrorResponse({ description: 'Server error' })
   @UseGuards(JwtAuthGuard)
   @Get('logout')
   public async logout(@Req() req: MyRequest) {
-    return this.authService.logout(req.user.id);
+    await this.authService.logout(req.user.id);
+    return { message: 'Disconnect...' };
   }
 }

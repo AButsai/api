@@ -5,6 +5,7 @@ import {
   ApiNotFoundResponse,
   ApiOperation,
   ApiResponse,
+  ApiTags,
 } from '@nestjs/swagger';
 import { Response } from 'express';
 import {
@@ -14,6 +15,7 @@ import {
 } from './dto/mail.dto';
 import { MailService } from './mail.service';
 
+@ApiTags('Email')
 @Controller('api/mail')
 export class MailController {
   private readonly expirationDate: Date;

@@ -1,4 +1,4 @@
-import { initializeFirebaseApp } from '@entities/firebase/firebase.config';
+import { initializeFirebaseApp } from '@entities/upload/config/firebase.config';
 import { UploadDto } from '@entities/upload/dto/upload.dto';
 import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';

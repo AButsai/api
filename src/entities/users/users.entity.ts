@@ -21,8 +21,8 @@ export class UserEntity extends MyBaseEntity {
   public password: string;
 
   @ApiProperty({ example: 'URL', description: 'User avatar' })
-  @Column({ name: 'avatar', type: 'varchar', nullable: true })
-  public avatar: string;
+  @Column({ name: 'avatar_url', type: 'varchar', nullable: true })
+  public avatarURL: string;
 
   @ApiProperty({ example: 'Mark', description: 'User First name' })
   @Column({ name: 'first_name', type: 'varchar', nullable: true })
