@@ -46,7 +46,7 @@ export class UserEntity extends MyBaseEntity {
   })
   @Column({ name: 'telegram_contact', type: 'varchar', nullable: true })
   @Matches(regex.telegramRegex, {
-    message: 'Telegram contact must be in the format "t.me/name"',
+    message: 'Telegram contact must be in the format "https://t.me/name"',
   })
   public telegramContact: string;
 
