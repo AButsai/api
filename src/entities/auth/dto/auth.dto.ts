@@ -40,3 +40,11 @@ export class AuthResponseDto {
   })
   refreshToken: string;
 }
+
+export class LogoutResponseDto {
+  @ApiProperty({
+    example: 'Disconnect...',
+    description: 'Logout',
+  })
+  message: string;
+}

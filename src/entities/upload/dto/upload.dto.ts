@@ -15,10 +15,11 @@ export class UploadDto {
   path: string;
 }
 
-export class ResponseUploadDto {
+export class UploadFileResponseDto {
   @ApiProperty({
-    example: '/avatars/avatar_pokemon.png',
-    description: 'Url file',
+    type: 'string',
+    format: 'binary',
+    description: 'File to upload',
   })
-  avatar: string;
+  fileURL: string;
 }
