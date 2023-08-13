@@ -3,6 +3,7 @@ import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { UserEntity } from '../users/users.entity';
+import { TUser } from '@src/types/request.interface';
 
 @Injectable()
 export class TokensService {
@@ -12,9 +13,7 @@ export class TokensService {
     private readonly jwtService: JwtService,
   ) {}
 
-  public async refreshToken() {}
-
-  public async generateTokens(user: UserEntity) {
+  public async generateTokens(user: UserEntity | TUser) {
     const roles = user.roles.map((role) =>
       typeof role === 'string' ? role : role.role,
     );
