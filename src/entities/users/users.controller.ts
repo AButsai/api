@@ -20,8 +20,8 @@ import {
 } from '@nestjs/swagger';
 import { MyRequest } from '@src/types/request.interface';
 import { Response } from 'express';
-import { UsersService } from './users.service';
 import { UpdateUserDto } from './dto/users.dto';
+import { UsersService } from './users.service';
 
 @ApiTags('Users')
 @Controller('api/users')
@@ -41,7 +41,10 @@ export class UsersController {
   })
   @ApiResponse({ status: 200, type: '' })
   @ApiNotFoundResponse({ description: 'Not found' })
-  @ApiUnauthorizedResponse({ description: 'Not authorized Invalid token type' })
+  @ApiUnauthorizedResponse({
+    description:
+      'Not authorized jwt expired || Not authorized Invalid token type',
+  })
   @ApiInternalServerErrorResponse({ description: 'Server error' })
   @UseGuards(JwtAuthGuard)
   @Get('current')

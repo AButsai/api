@@ -64,7 +64,11 @@ export class AuthController {
     required: true,
   })
   @ApiOkResponse({ type: LogoutResponseDto })
-  @ApiNotFoundResponse({ description: 'Not found error' })
+  @ApiNotFoundResponse({ description: 'Not found' })
+  @ApiUnauthorizedResponse({
+    description:
+      'Not authorized jwt expired || Not authorized Invalid token type',
+  })
   @ApiInternalServerErrorResponse({ description: 'Server error' })
   @UseGuards(JwtAuthGuard)
   @Get('logout')
