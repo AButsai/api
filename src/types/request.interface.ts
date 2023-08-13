@@ -1,6 +1,6 @@
 import { Request } from 'express';
 
-type TUser = {
+export type TUser = {
   email: string;
   id: string;
   roles: string[];

@@ -5,6 +5,7 @@ import {
   Get,
   Post,
   Req,
+  Res,
   UseGuards,
   ValidationPipe,
 } from '@nestjs/common';
@@ -21,6 +22,7 @@ import {
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
 import { MyRequest } from '@src/types/request.interface';
+import { Response } from 'express';
 import { AuthService } from './auth.service';
 import { AuthDto, AuthResponseDto, LogoutResponseDto } from './dto/auth.dto';
 
@@ -66,8 +68,9 @@ export class AuthController {
   @ApiInternalServerErrorResponse({ description: 'Server error' })
   @UseGuards(JwtAuthGuard)
   @Get('logout')
-  public async logout(@Req() req: MyRequest) {
+  public async logout(@Req() req: MyRequest, @Res() res: Response) {
     await this.authService.logout(req.user.id);
-    return { message: 'Disconnect...' };
+    res.clearCookie('refreshToken');
+    res.send({ message: 'Disconnect...' });
   }
 }
