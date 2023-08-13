@@ -6,7 +6,7 @@ import { Response } from 'express';
 import { TokensService } from './tokens.service';
 
 @ApiTags('Tokens')
-@Controller('tokens')
+@Controller('api/tokens')
 export class TokensController {
   private readonly expirationDate: Date;
   constructor(private readonly tokensService: TokensService) {
