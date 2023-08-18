@@ -1,4 +1,5 @@
 import { EducationEntity } from '@entities/education/education.entity';
+import { ProjectEntity } from '@entities/project/project.entity';
 import { WorkEntity } from '@entities/work/work.entity';
 import { ApiProperty } from '@nestjs/swagger';
 import { MyBaseEntity } from '@utils/base.entity';
@@ -33,6 +34,10 @@ export class UserEntity extends MyBaseEntity {
   @ApiProperty({ example: 'Spencer', description: 'User Last name' })
   @Column({ name: 'last_name', type: 'varchar', nullable: true })
   public lastName: string;
+
+  @ApiProperty({ example: 'FrontEnd', description: 'Position user' })
+  @Column({ name: 'position', type: 'varchar', nullable: true })
+  public position: string;
 
   @ApiProperty({ example: 'contactPhone', description: 'User contact phone' })
   @Column({ name: 'phone', type: 'varchar', nullable: true })
@@ -113,4 +118,7 @@ export class UserEntity extends MyBaseEntity {
 
   @OneToMany(() => EducationEntity, (education) => education.user)
   public educations: EducationEntity[];
+
+  @OneToMany(() => ProjectEntity, (project) => project.user)
+  public projects: ProjectEntity[];
 }
