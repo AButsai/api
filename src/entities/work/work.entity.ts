@@ -35,6 +35,6 @@ export class WorkEntity extends MyBaseEntity {
   @Column({ name: 'technologies', type: 'varchar', nullable: true })
   public technologies: string;
 
-  @ManyToOne(() => UserEntity, (user) => user.works)
+  @ManyToOne(() => UserEntity, (user) => user.works, { onDelete: 'CASCADE' })
   public user: UserEntity;
 }

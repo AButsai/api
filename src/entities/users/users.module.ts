@@ -1,3 +1,4 @@
+import { EducationEntity } from '@entities/education/education.entity';
 import { TokensModule } from '@entities/tokens/tokens.module';
 import { WorkEntity } from '@entities/work/work.entity';
 import { JwtGuardsModule } from '@guards/jwtGuard/jwt-auth.module';
@@ -10,7 +11,7 @@ import { UsersService } from './users.service';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([UserEntity, WorkEntity]),
+    TypeOrmModule.forFeature([UserEntity, WorkEntity, EducationEntity]),
     JwtGuardsModule,
     TokensModule,
   ],

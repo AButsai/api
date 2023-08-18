@@ -10,6 +10,6 @@ export class RoleEntity extends MyBaseEntity {
   @Column({ name: 'user_role', type: 'enum', enum: ERole })
   public role: ERole;
 
-  @ManyToOne(() => UserEntity, (user) => user.roles)
+  @ManyToOne(() => UserEntity, (user) => user.roles, { onDelete: 'CASCADE' })
   public users: UserEntity;
 }
