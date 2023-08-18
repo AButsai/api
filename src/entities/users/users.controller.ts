@@ -20,7 +20,7 @@ import {
 } from '@nestjs/swagger';
 import { MyRequest } from '@src/types/request.interface';
 import { Response } from 'express';
-import { UpdateUserDto } from './dto/users.dto';
+import { ResponseDto, UpdateUserDto } from './dto/users.dto';
 import { UsersService } from './users.service';
 
 @ApiTags('Users')
@@ -40,7 +40,7 @@ export class UsersController {
       format: 'Bearer YOUR_TOKEN_HERE',
     },
   })
-  @ApiResponse({ status: 200, type: '' })
+  @ApiResponse({ status: 200, type: ResponseDto })
   @ApiNotFoundResponse({ description: 'Not found' })
   @ApiUnauthorizedResponse({
     description:

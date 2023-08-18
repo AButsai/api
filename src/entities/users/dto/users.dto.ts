@@ -1,3 +1,6 @@
+import { EducationDto } from '@entities/education/dto/education.dto';
+import { ProjectDto } from '@entities/project/dto/project.dto';
+import { WorkDto } from '@entities/work/dto/work.dto';
 import { ApiProperty } from '@nestjs/swagger';
 import * as regex from '@utils/regex-expressions';
 import {
@@ -127,6 +130,15 @@ export class UserResponseDto {
 
   @ApiProperty({ example: false, description: 'Is verified user' })
   public verified: boolean;
+
+  @ApiProperty({ type: [WorkDto] })
+  works: WorkDto;
+
+  @ApiProperty({ type: [EducationDto] })
+  education: EducationDto;
+
+  @ApiProperty({ type: [ProjectDto] })
+  projects: ProjectDto;
 }
 export class ResponseDto {
   @ApiProperty({
