@@ -1,4 +1,5 @@
 import { TokensModule } from '@entities/tokens/tokens.module';
+import { WorkEntity } from '@entities/work/work.entity';
 import { JwtGuardsModule } from '@guards/jwtGuard/jwt-auth.module';
 import { Module } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
@@ -9,7 +10,7 @@ import { UsersService } from './users.service';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([UserEntity]),
+    TypeOrmModule.forFeature([UserEntity, WorkEntity]),
     JwtGuardsModule,
     TokensModule,
   ],

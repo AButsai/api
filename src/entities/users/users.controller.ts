@@ -1,4 +1,4 @@
-import { JwtAuthGuard } from '@guards/jwtGuard/jwt-auth.guard';
+import { JwtAuthTokenTypeGuard } from '@guards/jwtGuard/jwt-auth-token-type.guard';
 import {
   Body,
   Controller,
@@ -26,18 +26,19 @@ import { UsersService } from './users.service';
 @ApiTags('Users')
 @Controller('api/users')
 export class UsersController {
-  private readonly expirationDate: Date;
-  constructor(private readonly userService: UsersService) {
-    this.expirationDate = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
-  }
+  constructor(private readonly userService: UsersService) {}
 
   // Current user
   @ApiOperation({ summary: 'Current user' })
   @ApiBearerAuth()
   @ApiHeader({
     name: 'Authorization',
-    description: 'Bearer token',
+    description: 'token-type: access_token',
     required: true,
+    schema: {
+      type: 'string',
+      format: 'Bearer YOUR_TOKEN_HERE',
+    },
   })
   @ApiResponse({ status: 200, type: '' })
   @ApiNotFoundResponse({ description: 'Not found' })
@@ -46,15 +47,17 @@ export class UsersController {
       'Not authorized jwt expired || Not authorized Invalid token type',
   })
   @ApiInternalServerErrorResponse({ description: 'Server error' })
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthTokenTypeGuard)
   @Get('current')
-  public async currentUser(@Req() req: MyRequest, @Res() res: Response) {
-    const data = await this.userService.current(req.user.email);
-    res.cookie('refreshToken', data.refreshToken, {
-      expires: this.expirationDate,
-      httpOnly: true,
-    });
-    res.send({ accessToken: data.accessToken, user: data.user });
+  public async currentUser(@Req() req: MyRequest) {
+    const { user, accessToken, refreshToken } = await this.userService.current(
+      req.user.email,
+    );
+    return {
+      refreshToken,
+      accessToken,
+      user,
+    };
   }
 
   // Update user
@@ -62,8 +65,12 @@ export class UsersController {
   @ApiBearerAuth()
   @ApiHeader({
     name: 'Authorization',
-    description: 'Bearer token',
+    description: 'token-type: access_token',
     required: true,
+    schema: {
+      type: 'string',
+      format: 'Bearer YOUR_TOKEN_HERE',
+    },
   })
   @ApiResponse({ status: 200, type: '' })
   @ApiNotFoundResponse({ description: 'Not found' })
@@ -72,18 +79,21 @@ export class UsersController {
       'Not authorized jwt expired || Not authorized Invalid token type',
   })
   @ApiInternalServerErrorResponse({ description: 'Server error' })
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthTokenTypeGuard)
   @Patch('update')
   public async updateUser(
     @Req() req: MyRequest,
     @Res() res: Response,
     @Body() body: UpdateUserDto,
   ) {
-    const data = await this.userService.update(req.user.id, body);
-    res.cookie('refreshToken', data.refreshToken, {
-      expires: this.expirationDate,
-      httpOnly: true,
-    });
-    res.send({ accessToken: data.accessToken, user: data.user });
+    const { user, accessToken, refreshToken } = await this.userService.update(
+      req.user.id,
+      body,
+    );
+    return {
+      refreshToken,
+      accessToken,
+      user,
+    };
   }
 }

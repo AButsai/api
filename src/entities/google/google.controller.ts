@@ -16,10 +16,7 @@ import { GoogleService } from './google.service';
 @ApiTags('Google auth')
 @Controller('api/google')
 export class GoogleController {
-  private readonly expirationDate: Date;
-  constructor(private readonly googleService: GoogleService) {
-    this.expirationDate = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
-  }
+  constructor(private readonly googleService: GoogleService) {}
 
   @ApiOperation({ summary: 'Google authentication' })
   @ApiResponse({ status: 200, description: 'OK' })
@@ -45,16 +42,11 @@ export class GoogleController {
   @Get('/callback')
   @UseGuards(AuthGuard('google'))
   async googleAuthCallback(@Req() req: MyRequest, @Res() res: Response) {
-    const { accessToken, refreshToken } = await this.googleService.auth(
-      req.user.email,
-    );
-    res.cookie('refreshToken', refreshToken, {
-      expires: this.expirationDate,
-      httpOnly: true,
-    });
+    const tokens = await this.googleService.auth(req.user.email);
+
     const redirectUrl = `${
       process.env.REDIRECT_TO_SITE_HOME
-    }?userData=${encodeURIComponent(JSON.stringify(accessToken))}`;
+    }?userData=${encodeURIComponent(JSON.stringify(tokens))}`;
     res.redirect(redirectUrl);
   }
 }

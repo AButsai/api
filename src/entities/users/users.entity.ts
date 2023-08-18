@@ -1,8 +1,9 @@
+import { WorkEntity } from '@entities/work/work.entity';
 import { ApiProperty } from '@nestjs/swagger';
 import { MyBaseEntity } from '@utils/base.entity';
 import * as regex from '@utils/regex-expressions';
 import { Matches, MinLength } from 'class-validator';
-import { Column, Entity, JoinTable, ManyToMany, Unique } from 'typeorm';
+import { Column, Entity, OneToMany, Unique } from 'typeorm';
 import { RoleEntity } from './role.entity';
 
 @Entity('users')
@@ -62,6 +63,17 @@ export class UserEntity extends MyBaseEntity {
   public linkedinUrl: string;
 
   @ApiProperty({
+    example: 'https://github.com/user',
+    description: 'User gitHub url',
+    required: true,
+  })
+  @Column({ name: 'git_url', type: 'varchar', nullable: true })
+  @Matches(regex.linkRegex, {
+    message: 'This should have been a link',
+  })
+  public gitUrl: string;
+
+  @ApiProperty({
     example: 'Beginner/Elementary(A1)',
     description: 'English level',
     required: true,
@@ -90,9 +102,11 @@ export class UserEntity extends MyBaseEntity {
 
   @ApiProperty({ example: 'Refresh token', description: ' Refresh  token' })
   @Column({ name: 'refresh_token', type: 'varchar', nullable: true })
-  refreshToken: string;
+  public refreshToken: string;
 
-  @ManyToMany(() => RoleEntity, (roles) => roles.users, { onDelete: 'CASCADE' })
-  @JoinTable()
+  @OneToMany(() => RoleEntity, (roles) => roles.users, { onDelete: 'CASCADE' })
   public roles: RoleEntity[];
+
+  @OneToMany(() => WorkEntity, (work) => work.user, { onDelete: 'CASCADE' })
+  public works: WorkEntity[];
 }
