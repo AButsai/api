@@ -50,7 +50,7 @@ export class PasswordController {
   })
   @ApiNotFoundResponse({ description: 'Not found' })
   @ApiInternalServerErrorResponse({ description: 'Server error' })
-  @Post('request-change-password')
+  @Post('request')
   async requestChangePassword(@Body() body: EmailDto) {
     return this.passwordService.requestChangePassword(body.email);
   }
@@ -60,7 +60,7 @@ export class PasswordController {
   @ApiOkResponse({ description: 'OK' })
   @ApiNotFoundResponse({ description: 'Not found' })
   @ApiInternalServerErrorResponse({ description: 'Server error' })
-  @Get('verify-change-password/:verifyToken')
+  @Get('verify/:verifyToken')
   async verifyChangePassword(
     @Param('verifyToken') verifyToken: string,
     @Res() res: Response,
