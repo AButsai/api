@@ -135,7 +135,7 @@ export class UserResponseDto {
   works: WorkDto;
 
   @ApiProperty({ type: [EducationDto] })
-  education: EducationDto;
+  educations: EducationDto;
 
   @ApiProperty({ type: [ProjectDto] })
   projects: ProjectDto;

@@ -25,6 +25,7 @@ export class ProjectService {
       user,
     });
     await this.projectRepository.save(newProject);
+    delete newProject.user;
     return newProject;
   }
 

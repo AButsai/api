@@ -50,7 +50,7 @@ export class ProjectController {
   @UseGuards(JwtAuthTokenTypeGuard)
   @Post()
   public async createProject(@Req() req: MyRequest, @Body() body: ProjectDto) {
-    await this.projectService.createProject(req.user.id, body);
+    return await this.projectService.createProject(req.user.id, body);
   }
 
   // Update project experience
@@ -78,7 +78,7 @@ export class ProjectController {
     @Param('id') id: string,
     @Body() body: ProjectDto,
   ) {
-    await this.projectService.updateProject(id, body);
+    return await this.projectService.updateProject(id, body);
   }
 
   // Delete project experience
@@ -103,6 +103,6 @@ export class ProjectController {
   @UseGuards(JwtAuthTokenTypeGuard)
   @Delete(':id')
   public async deleteProject(@Param('id') id: string) {
-    await this.projectService.deleteProject(id);
+    return await this.projectService.deleteProject(id);
   }
 }

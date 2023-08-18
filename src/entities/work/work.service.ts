@@ -22,6 +22,7 @@ export class WorkService {
       user,
     });
     await this.workRepository.save(newWork);
+    delete newWork.user;
     return newWork;
   }
 

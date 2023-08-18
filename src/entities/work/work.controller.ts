@@ -50,7 +50,7 @@ export class WorkController {
   @UseGuards(JwtAuthTokenTypeGuard)
   @Post()
   public async createWork(@Req() req: MyRequest, @Body() body: WorkDto) {
-    await this.workService.createWork(req.user.id, body);
+    return await this.workService.createWork(req.user.id, body);
   }
 
   // Update work experience
@@ -78,7 +78,7 @@ export class WorkController {
     @Param('workId') workId: string,
     @Body() body: WorkDto,
   ) {
-    await this.workService.updateWork(workId, body);
+    return await this.workService.updateWork(workId, body);
   }
 
   // Delete work experience
@@ -103,6 +103,6 @@ export class WorkController {
   @UseGuards(JwtAuthTokenTypeGuard)
   @Delete(':workId')
   public async deleteWork(@Param('workId') workId: string) {
-    await this.workService.deleteWork(workId);
+    return await this.workService.deleteWork(workId);
   }
 }
