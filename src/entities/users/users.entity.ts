@@ -1,3 +1,4 @@
+import { EducationEntity } from '@entities/education/education.entity';
 import { WorkEntity } from '@entities/work/work.entity';
 import { ApiProperty } from '@nestjs/swagger';
 import { MyBaseEntity } from '@utils/base.entity';
@@ -104,9 +105,12 @@ export class UserEntity extends MyBaseEntity {
   @Column({ name: 'refresh_token', type: 'varchar', nullable: true })
   public refreshToken: string;
 
-  @OneToMany(() => RoleEntity, (roles) => roles.users, { onDelete: 'CASCADE' })
+  @OneToMany(() => RoleEntity, (roles) => roles.users)
   public roles: RoleEntity[];
 
-  @OneToMany(() => WorkEntity, (work) => work.user, { onDelete: 'CASCADE' })
+  @OneToMany(() => WorkEntity, (work) => work.user)
   public works: WorkEntity[];
+
+  @OneToMany(() => EducationEntity, (education) => education.user)
+  public educations: EducationEntity[];
 }
