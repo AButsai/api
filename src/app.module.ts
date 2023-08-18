@@ -13,6 +13,7 @@ import { CorsMiddleware } from './middleware/cors-middleware';
 import { UploadModule } from './entities/upload/upload.module';
 import { WorkModule } from './entities/work/work.module';
 import { EducationModule } from './entities/education/education.module';
+import { ProjectModule } from './entities/project/project.module';
 
 @Module({
   imports: [
@@ -31,6 +32,7 @@ import { EducationModule } from './entities/education/education.module';
     UploadModule,
     WorkModule,
     EducationModule,
+    ProjectModule,
   ],
   controllers: [],
   providers: [],

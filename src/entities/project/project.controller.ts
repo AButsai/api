@@ -20,15 +20,15 @@ import {
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
 import { MyRequest } from '@src/types/request.interface';
-import { DeleteWorkResponseDto, WorkDto } from './dto/work.dto';
-import { WorkService } from './work.service';
+import { DeleteProjectResponseDto, ProjectDto } from './dto/project.dto';
+import { ProjectService } from './project.service';
 
-@ApiTags('Work experience')
-@Controller('api/works')
-export class WorkController {
-  constructor(private readonly workService: WorkService) {}
+@ApiTags('Project experience')
+@Controller('api/projects')
+export class ProjectController {
+  constructor(private readonly projectService: ProjectService) {}
 
-  // Create work experience
+  // Create project experience
   @ApiOperation({ summary: 'Add works experience' })
   @ApiBearerAuth()
   @ApiHeader({
@@ -40,7 +40,7 @@ export class WorkController {
       format: 'Bearer YOUR_TOKEN_HERE',
     },
   })
-  @ApiOkResponse({ type: WorkDto })
+  @ApiOkResponse({ type: ProjectDto })
   @ApiNotFoundResponse({ description: 'Not found' })
   @ApiUnauthorizedResponse({
     description:
@@ -49,11 +49,11 @@ export class WorkController {
   @ApiInternalServerErrorResponse({ description: 'Server error' })
   @UseGuards(JwtAuthTokenTypeGuard)
   @Post()
-  public async createWork(@Req() req: MyRequest, @Body() body: WorkDto) {
-    await this.workService.createWork(req.user.id, body);
+  public async createProject(@Req() req: MyRequest, @Body() body: ProjectDto) {
+    await this.projectService.createProject(req.user.id, body);
   }
 
-  // Update work experience
+  // Update project experience
   @ApiOperation({ summary: 'Update works experience' })
   @ApiBearerAuth()
   @ApiHeader({
@@ -65,7 +65,7 @@ export class WorkController {
       format: 'Bearer YOUR_TOKEN_HERE',
     },
   })
-  @ApiOkResponse({ type: WorkDto })
+  @ApiOkResponse({ type: ProjectDto })
   @ApiNotFoundResponse({ description: 'Not found' })
   @ApiUnauthorizedResponse({
     description:
@@ -73,16 +73,16 @@ export class WorkController {
   })
   @ApiInternalServerErrorResponse({ description: 'Server error' })
   @UseGuards(JwtAuthTokenTypeGuard)
-  @Patch(':workId')
-  public async updateWork(
-    @Param('workId') workId: string,
-    @Body() body: WorkDto,
+  @Patch(':id')
+  public async updateProject(
+    @Param('id') id: string,
+    @Body() body: ProjectDto,
   ) {
-    await this.workService.updateWork(workId, body);
+    await this.projectService.updateProject(id, body);
   }
 
-  // Delete work experience
-  @ApiOperation({ summary: 'Delete works experience' })
+  // Delete project experience
+  @ApiOperation({ summary: 'Delete project experience' })
   @ApiBearerAuth()
   @ApiHeader({
     name: 'Authorization',
@@ -93,7 +93,7 @@ export class WorkController {
       format: 'Bearer YOUR_TOKEN_HERE',
     },
   })
-  @ApiOkResponse({ type: DeleteWorkResponseDto })
+  @ApiOkResponse({ type: DeleteProjectResponseDto })
   @ApiNotFoundResponse({ description: 'Not found' })
   @ApiUnauthorizedResponse({
     description:
@@ -101,8 +101,8 @@ export class WorkController {
   })
   @ApiInternalServerErrorResponse({ description: 'Server error' })
   @UseGuards(JwtAuthTokenTypeGuard)
-  @Delete(':workId')
-  public async deleteWork(@Param('workId') workId: string) {
-    await this.workService.deleteWork(workId);
+  @Delete(':id')
+  public async deleteProject(@Param('id') id: string) {
+    await this.projectService.deleteProject(id);
   }
 }
