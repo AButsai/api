@@ -11,6 +11,7 @@ import { TokensModule } from './entities/tokens/tokens.module';
 import { UsersModule } from './entities/users/users.module';
 import { CorsMiddleware } from './middleware/cors-middleware';
 import { UploadModule } from './entities/upload/upload.module';
+import { WorkModule } from './entities/work/work.module';
 
 @Module({
   imports: [
@@ -27,6 +28,7 @@ import { UploadModule } from './entities/upload/upload.module';
     PasswordModule,
     TokensModule,
     UploadModule,
+    WorkModule,
   ],
   controllers: [],
   providers: [],

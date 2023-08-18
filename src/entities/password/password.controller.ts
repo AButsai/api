@@ -39,10 +39,7 @@ import { PasswordService } from './password.service';
 @ApiTags('Change password')
 @Controller('api/passwords')
 export class PasswordController {
-  private readonly expirationDate: Date;
-  constructor(private readonly passwordService: PasswordService) {
-    this.expirationDate = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
-  }
+  constructor(private readonly passwordService: PasswordService) {}
 
   // Request for change password
   @ApiOperation({ summary: 'Request change password' })
@@ -68,15 +65,11 @@ export class PasswordController {
     @Param('verifyToken') verifyToken: string,
     @Res() res: Response,
   ) {
-    const { accessToken, refreshToken } =
-      await this.passwordService.verifyChangePassword(verifyToken);
-    res.cookie('refreshToken', refreshToken, {
-      expires: this.expirationDate,
-      httpOnly: true,
-    });
+    const tokens = await this.passwordService.verifyChangePassword(verifyToken);
+
     const redirectUrl = `${
       process.env.REDIRECT_TO_PASSWORD_CHANGE_FORM
-    }?userData=${encodeURIComponent(JSON.stringify(accessToken))}`;
+    }?userData=${encodeURIComponent(JSON.stringify(tokens))}`;
     res.redirect(redirectUrl);
   }
 
@@ -85,7 +78,7 @@ export class PasswordController {
   @ApiBearerAuth()
   @ApiHeader({
     name: 'Authorization',
-    description: 'Access token',
+    description: 'token-type: access_token',
     required: true,
     schema: {
       type: 'string',

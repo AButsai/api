@@ -18,10 +18,7 @@ import { MailService } from './mail.service';
 @ApiTags('Email')
 @Controller('api/mail')
 export class MailController {
-  private readonly expirationDate: Date;
-  constructor(private readonly mailService: MailService) {
-    this.expirationDate = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
-  }
+  constructor(private readonly mailService: MailService) {}
 
   // Check email
   @ApiOperation({ summary: 'Check email' })
@@ -40,16 +37,11 @@ export class MailController {
     @Param('verifyToken') verifyToken: string,
     @Res() res: Response,
   ) {
-    const { accessToken, refreshToken } = await this.mailService.verifyEmail(
-      verifyToken,
-    );
-    res.cookie('refreshToken', refreshToken, {
-      expires: this.expirationDate,
-      httpOnly: true,
-    });
+    const tokens = await this.mailService.verifyEmail(verifyToken);
+
     const redirectUrl = `${
       process.env.REDIRECT_TO_SITE_HOME
-    }?userData=${encodeURIComponent(JSON.stringify(accessToken))}`;
+    }?userData=${encodeURIComponent(JSON.stringify(tokens))}`;
     res.redirect(redirectUrl);
   }
 
