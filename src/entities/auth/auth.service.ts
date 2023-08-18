@@ -16,6 +16,7 @@ import * as bcryptjs from 'bcryptjs';
 import { Repository } from 'typeorm';
 import { v4 } from 'uuid';
 import { AuthDto } from './dto/auth.dto';
+import * as pathUrl from '@src/constants/constants';
 
 @Injectable()
 export class AuthService {
@@ -43,7 +44,7 @@ export class AuthService {
     await this.mailService.sendEmailHandler(
       email,
       verifyToken,
-      'mail/verify-email',
+      pathUrl.VERIFY_EMAIL,
     );
 
     const role = this.roleRepository.create({

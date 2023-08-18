@@ -7,6 +7,7 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import * as pathUrl from '@src/constants/constants';
 import * as bcryptjs from 'bcryptjs';
 import { Repository } from 'typeorm';
 import { v4 } from 'uuid';
@@ -14,15 +15,12 @@ import { ChangePasswordDto } from './dto/password.dto';
 
 @Injectable()
 export class PasswordService {
-  private readonly path: string;
   constructor(
     @InjectRepository(UserEntity)
     private readonly userRepository: Repository<UserEntity>,
     private readonly mailService: MailService,
     private readonly tokensService: TokensService,
-  ) {
-    this.path = 'passwords/verify-change-password';
-  }
+  ) {}
 
   // Request for change password
   public async requestChangePassword(email: string) {
@@ -35,7 +33,7 @@ export class PasswordService {
     await this.mailService.sendEmailHandler(
       user.email,
       verifyToken,
-      this.path,
+      pathUrl.VERIFY_EMAIL_PASS,
       user.firstName,
     );
     return { message: 'Email send' };
@@ -74,6 +72,6 @@ export class PasswordService {
 
   // Resend email
   public async resendEmail(email: string) {
-    return await this.mailService.resendEmail(email, this.path);
+    return await this.mailService.resendEmail(email, pathUrl.VERIFY_EMAIL_PASS);
   }
 }
