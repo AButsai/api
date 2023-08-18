@@ -25,6 +25,7 @@ export class EducationService {
       user,
     });
     await this.educationRepository.save(newEducation);
+    delete newEducation.user;
     return newEducation;
   }
 
