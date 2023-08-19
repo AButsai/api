@@ -70,6 +70,16 @@ export class ProjectDto {
   public description: string;
 
   @ApiProperty({
+    example: 'Цей прект для запису контактів...',
+    description: 'Описання проекту',
+    required: false,
+  })
+  @ValidateIf((object, value) => value !== undefined)
+  @IsNotEmpty()
+  @IsString()
+  public description_ua: string;
+
+  @ApiProperty({
     example: 'Used: NestJs, Swagger, TypeOrm.....',
     description: 'How used technologies',
     required: false,

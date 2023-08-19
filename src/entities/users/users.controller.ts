@@ -1,13 +1,5 @@
 import { JwtAuthTokenTypeGuard } from '@guards/jwtGuard/jwt-auth-token-type.guard';
-import {
-  Body,
-  Controller,
-  Get,
-  Patch,
-  Req,
-  Res,
-  UseGuards,
-} from '@nestjs/common';
+import { Body, Controller, Get, Patch, Req, UseGuards } from '@nestjs/common';
 import {
   ApiBearerAuth,
   ApiHeader,
@@ -19,7 +11,6 @@ import {
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
 import { MyRequest } from '@src/types/request.interface';
-import { Response } from 'express';
 import { ResponseDto, UpdateUserDto } from './dto/users.dto';
 import { UsersService } from './users.service';
 
@@ -72,7 +63,7 @@ export class UsersController {
       format: 'Bearer YOUR_TOKEN_HERE',
     },
   })
-  @ApiResponse({ status: 200, type: '' })
+  @ApiResponse({ status: 200, type: ResponseDto })
   @ApiNotFoundResponse({ description: 'Not found' })
   @ApiUnauthorizedResponse({
     description:
@@ -81,11 +72,7 @@ export class UsersController {
   @ApiInternalServerErrorResponse({ description: 'Server error' })
   @UseGuards(JwtAuthTokenTypeGuard)
   @Patch('update')
-  public async updateUser(
-    @Req() req: MyRequest,
-    @Res() res: Response,
-    @Body() body: UpdateUserDto,
-  ) {
+  public async updateUser(@Req() req: MyRequest, @Body() body: UpdateUserDto) {
     const { user, accessToken, refreshToken } = await this.userService.update(
       req.user.id,
       body,

@@ -74,6 +74,16 @@ export class ProjectEntity extends MyBaseEntity {
   public description: string;
 
   @ApiProperty({
+    example: 'This service for add contacts....',
+    description: 'Description projects',
+    required: false,
+  })
+  @IsNotEmpty()
+  @IsString()
+  @Column({ name: 'description_ua', type: 'varchar', nullable: true })
+  public description_ua: string;
+
+  @ApiProperty({
     example: 'Used: NestJs, Swagger, TypeOrm.....',
     description: 'How used technologies',
     required: false,

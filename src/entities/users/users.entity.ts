@@ -31,13 +31,35 @@ export class UserEntity extends MyBaseEntity {
   @Column({ name: 'first_name', type: 'varchar', nullable: true })
   public firstName: string;
 
+  @ApiProperty({ example: 'Mark', description: 'User First name' })
+  @Column({ name: 'first_name_ua', type: 'varchar', nullable: true })
+  public firstName_ua: string;
+
   @ApiProperty({ example: 'Spencer', description: 'User Last name' })
   @Column({ name: 'last_name', type: 'varchar', nullable: true })
   public lastName: string;
 
+  @ApiProperty({ example: 'Spencer', description: 'User Last name' })
+  @Column({ name: 'last_name_ua', type: 'varchar', nullable: true })
+  public lastName_ua: string;
+
   @ApiProperty({ example: 'FrontEnd', description: 'Position user' })
   @Column({ name: 'position', type: 'varchar', nullable: true })
   public position: string;
+
+  @ApiProperty({
+    example: 'I`m FullStack developer...',
+    description: 'Position user',
+  })
+  @Column({ name: 'about_me', type: 'varchar', nullable: true })
+  public aboutMe: string;
+
+  @ApiProperty({
+    example: 'I`m FullStack developer...',
+    description: 'Position user',
+  })
+  @Column({ name: 'about_me_ua', type: 'varchar', nullable: true })
+  public aboutMe_ua: string;
 
   @ApiProperty({ example: 'contactPhone', description: 'User contact phone' })
   @Column({ name: 'phone', type: 'varchar', nullable: true })
@@ -88,6 +110,22 @@ export class UserEntity extends MyBaseEntity {
   public englishLevel: string;
 
   @ApiProperty({
+    example: 'Native',
+    description: 'Ukraine langue',
+    required: true,
+  })
+  @Column({ name: 'ukraine_langue', type: 'varchar', nullable: true })
+  public ukraineLangue: string;
+
+  @ApiProperty({
+    example: 'Native',
+    description: 'Russian langue',
+    required: true,
+  })
+  @Column({ name: 'russian_langue', type: 'varchar', nullable: true })
+  public russianLangue: string;
+
+  @ApiProperty({
     example: 'resume url',
     description: 'Resume url',
     required: true,
@@ -97,6 +135,22 @@ export class UserEntity extends MyBaseEntity {
     message: 'This should have been a link',
   })
   public resumeUrl: string;
+
+  @ApiProperty({
+    example: 'default',
+    description: 'Sample site',
+    required: true,
+  })
+  @Column({ name: 'sample', type: 'varchar', nullable: true })
+  public sample: string;
+
+  @ApiProperty({
+    example: 'default',
+    description: 'Color schema site',
+    required: true,
+  })
+  @Column({ name: 'color_schema', type: 'varchar', nullable: true })
+  public colorSchema: string;
 
   @ApiProperty({ example: false, description: 'Is verified user' })
   @Column({ name: 'verified', type: 'boolean', default: false })
