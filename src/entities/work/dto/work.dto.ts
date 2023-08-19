@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsString } from 'class-validator';
+import { IsNotEmpty, IsString, ValidateIf } from 'class-validator';
 
 export class WorkDto {
   @ApiProperty({ example: 'BackEnd Developer', description: 'User position' })
@@ -29,6 +29,15 @@ export class WorkDto {
   @IsString()
   @IsNotEmpty()
   public descriptionWork: string;
+
+  @ApiProperty({
+    example: 'Апі для збереження контактів',
+    description: 'Для чого цей застосунок',
+  })
+  @ValidateIf((object, value) => value !== undefined)
+  @IsString()
+  @IsNotEmpty()
+  public descriptionWork_ua: string;
 
   @ApiProperty({
     example: 'Used: NestJS, TypeORM ...',

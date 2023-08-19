@@ -9,6 +9,7 @@ import {
   IsPhoneNumber,
   IsString,
   Matches,
+  ValidateIf,
 } from 'class-validator';
 
 export class UpdateUserDto {
@@ -23,10 +24,22 @@ export class UpdateUserDto {
   @IsString()
   firstName: string;
 
+  @ApiProperty({ example: 'Павло', description: 'User First name' })
+  @ValidateIf((object, value) => value !== undefined)
+  @IsNotEmpty()
+  @IsString()
+  firstName_ua: string;
+
   @ApiProperty({ example: 'Spencer', description: 'User Last name' })
   @IsNotEmpty()
   @IsString()
   lastName: string;
+
+  @ApiProperty({ example: 'Наливайко', description: 'User Last name' })
+  @ValidateIf((object, value) => value !== undefined)
+  @IsNotEmpty()
+  @IsString()
+  lastName_ua: string;
 
   @ApiProperty({ example: '+380XXXXXXXXX', description: 'User contact phone' })
   @IsNotEmpty()
@@ -73,64 +86,45 @@ export class UpdateUserDto {
   @IsNotEmpty()
   @IsString()
   englishLevel: string;
+
+  @ApiProperty({
+    example: 'Native',
+    description: 'Ukraine langue',
+    required: true,
+  })
+  @IsNotEmpty()
+  @IsString()
+  public ukraineLangue: string;
+
+  @ApiProperty({
+    example: 'Native',
+    description: 'Russian langue',
+    required: true,
+  })
+  @ValidateIf((object, value) => value !== undefined)
+  @IsNotEmpty()
+  @IsString()
+  public russianLangue: string;
+
+  @ApiProperty({
+    example: 'I`m FullStack developer...',
+    description: 'Position user',
+  })
+  @IsNotEmpty()
+  @IsString()
+  public aboutMe: string;
+
+  @ApiProperty({
+    example: 'Я FullStack разробник...',
+    description: 'Position user',
+  })
+  @ValidateIf((object, value) => value !== undefined)
+  @IsNotEmpty()
+  @IsString()
+  public aboutMe_ua: string;
 }
 
-export class UserResponseDto {
-  @ApiProperty({ example: 'email', description: 'User  email' })
-  public email: string;
-
-  @ApiProperty({ example: 'User password', description: 'User  password' })
-  public password: string;
-
-  @ApiProperty({ example: 'URL', description: 'User avatar' })
-  public avatarURL: string;
-
-  @ApiProperty({ example: 'Mark', description: 'User First name' })
-  public firstName: string;
-
-  @ApiProperty({ example: 'Spencer', description: 'User Last name' })
-  public lastName: string;
-
-  @ApiProperty({ example: 'contactPhone', description: 'User contact phone' })
-  public phone: string;
-
-  @ApiProperty({
-    example: 'Telegram contact',
-    description: 'User Telegram contact',
-  })
-  public telegramContact: string;
-
-  @ApiProperty({
-    example: 'https://www.linkedin.com/in/user/',
-    description: 'User linkedin url',
-    required: true,
-  })
-  public linkedinUrl: string;
-
-  @ApiProperty({
-    example: 'https://github.com/user',
-    description: 'User gitHub url',
-    required: true,
-  })
-  public gitUrl: string;
-
-  @ApiProperty({
-    example: 'Beginner/Elementary(A1)',
-    description: 'English level',
-    required: true,
-  })
-  public englishLevel: string;
-
-  @ApiProperty({
-    example: 'resume url',
-    description: 'Resume url',
-    required: true,
-  })
-  public resumeUrl: string;
-
-  @ApiProperty({ example: false, description: 'Is verified user' })
-  public verified: boolean;
-
+export class UserResponseDto extends UpdateUserDto {
   @ApiProperty({ type: [WorkDto] })
   works: WorkDto;
 

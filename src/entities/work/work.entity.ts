@@ -29,6 +29,13 @@ export class WorkEntity extends MyBaseEntity {
   public descriptionWork: string;
 
   @ApiProperty({
+    example: 'Server-side development.',
+    description: 'Description Work',
+  })
+  @Column({ name: 'description_work_ua', type: 'varchar', nullable: true })
+  public descriptionWork_ua: string;
+
+  @ApiProperty({
     example: 'Used: NestJS, TypeORM ...',
     description: 'Used technologies',
   })
