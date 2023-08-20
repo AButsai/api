@@ -16,6 +16,7 @@ import { EducationModule } from './entities/education/education.module';
 import { ProjectModule } from './entities/project/project.module';
 import { AdminModule } from './entities/admin/admin.module';
 import { IconsSvgModule } from './entities/icons-svg/icons-svg.module';
+import { UserDataModule } from './entities/user-data/user-data.module';
 
 @Module({
   imports: [
@@ -37,6 +38,7 @@ import { IconsSvgModule } from './entities/icons-svg/icons-svg.module';
     ProjectModule,
     AdminModule,
     IconsSvgModule,
+    UserDataModule,
   ],
   controllers: [],
   providers: [],

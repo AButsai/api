@@ -47,27 +47,6 @@ export class UpdateUserDto {
   phone: string;
 
   @ApiProperty({
-    example: 'https://t.me/name',
-    description: 'User Telegram contact',
-  })
-  @IsNotEmpty()
-  @Matches(regex.telegramRegex, {
-    message: 'Telegram contact must be in the format "https://t.me/name"',
-  })
-  telegramContact: string;
-
-  @ApiProperty({
-    example: 'https://www.linkedin.com/in/user/',
-    description: 'User linkedin url',
-    required: true,
-  })
-  @IsNotEmpty()
-  @Matches(regex.linkRegex, {
-    message: 'This should have been a link',
-  })
-  linkedinUrl: string;
-
-  @ApiProperty({
     example:
       'https://my-site.netlify.app?id=a70fdfe5-c1b5-4c1c-b603-b4847358d102',
     description: 'User site url',
@@ -77,10 +56,10 @@ export class UpdateUserDto {
   @Matches(regex.linkRegex, {
     message: 'This should have been a link',
   })
-  siteUrl: string;
+  siteResume: string;
 
   @ApiProperty({
-    example: 'https://my-resume.netlify.app',
+    example: 'https://drive.google.com/drive/u/0/my-drive',
     description: 'Resume url',
     required: true,
   })
@@ -88,7 +67,7 @@ export class UpdateUserDto {
   @Matches(regex.linkRegex, {
     message: 'This should have been a link',
   })
-  resumeUrl: string;
+  resume: string;
 
   @ApiProperty({
     example: 'Beginner/Elementary(A1)',
@@ -134,6 +113,87 @@ export class UpdateUserDto {
   @IsNotEmpty()
   @IsString()
   public aboutMe_ua: string;
+
+  @ApiProperty({
+    example: 'https://t.me/name',
+    description: 'User Telegram contact',
+  })
+  @ValidateIf((object, value) => value !== undefined)
+  @IsNotEmpty()
+  @Matches(regex.telegramRegex, {
+    message: 'Telegram contact must be in the format "https://t.me/name"',
+  })
+  telegram: string;
+
+  @ApiProperty({
+    example: 'https://www.linkedin.com/in/user/',
+    description: 'User linkedin url',
+    required: true,
+  })
+  @IsNotEmpty()
+  @Matches(regex.linkRegex, {
+    message: 'This should have been a link',
+  })
+  linkedin: string;
+
+  @ApiProperty({
+    example: 'https://github.com/user',
+    description: 'User gitHub url',
+    required: true,
+  })
+  @IsString()
+  @IsNotEmpty()
+  @Matches(regex.linkRegex, {
+    message: 'This should have been a link',
+  })
+  public github: string;
+
+  @ApiProperty({
+    example: 'https://www.facebook.com/profile.php',
+    description: 'User facebook url',
+    required: true,
+  })
+  @ValidateIf((object, value) => value !== undefined)
+  @Matches(regex.linkRegex, {
+    message: 'This should have been a link',
+  })
+  @IsString()
+  @IsNotEmpty()
+  public facebook: string;
+
+  @ApiProperty({
+    example: 'https://www.instagram.com',
+    description: 'User instagram url',
+    required: true,
+  })
+  @ValidateIf((object, value) => value !== undefined)
+  @Matches(regex.linkRegex, {
+    message: 'This should have been a link',
+  })
+  @IsString()
+  @IsNotEmpty()
+  public instagram: string;
+
+  @ApiProperty({ example: '+380999999999', description: 'User contact viber' })
+  @ValidateIf((object, value) => value !== undefined)
+  @Matches(regex.phoneRegex, {
+    message: 'Contact phone must be in the format "+380999999999"',
+  })
+  @IsString()
+  @IsNotEmpty()
+  public viber: string;
+
+  @ApiProperty({
+    example: '+380999999999',
+    description: 'User contact whatsapp',
+  })
+  @ValidateIf((object, value) => value !== undefined)
+  @Matches(regex.phoneRegex, {
+    message: 'Contact phone must be in the format "+380999999999"',
+  })
+  @IsString()
+  @IsNotEmpty()
+  public whatsapp: string;
 }
 
 export class UpdateSampleColorSchemaDto {
