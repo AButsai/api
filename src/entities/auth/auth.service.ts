@@ -48,7 +48,7 @@ export class AuthService {
     );
 
     const role = this.roleRepository.create({
-      role: ERole.ADMIN,
+      role: ERole.USER,
     });
 
     const newUser = this.userRepository.create({
