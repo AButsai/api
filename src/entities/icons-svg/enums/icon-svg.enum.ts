@@ -6,7 +6,7 @@ export enum ENameContacts {
   TELEGRAM = 'telegram',
   FACEBOOK = 'facebook',
   VIBER = 'viber',
-  WATS_UP = 'watsup',
+  WATS_UP = 'whatsapp',
   INSTAGRAM = 'instagram',
 }
 

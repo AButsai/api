@@ -35,7 +35,7 @@ export class IconsSvgController {
   constructor(private readonly iconSvgService: IconsSvgService) {}
 
   // Add icon
-  @ApiOperation({ summary: 'Add icons experience' })
+  @ApiOperation({ summary: 'Add icons' })
   @ApiBearerAuth()
   @ApiHeader({
     name: 'Authorization',
@@ -61,7 +61,7 @@ export class IconsSvgController {
   }
 
   // Update icon
-  @ApiOperation({ summary: 'Add icons experience' })
+  @ApiOperation({ summary: 'Update icons' })
   @ApiBearerAuth()
   @ApiHeader({
     name: 'Authorization',
@@ -87,7 +87,7 @@ export class IconsSvgController {
   }
 
   // Get icon by sort name or colorSchema
-  @ApiOperation({ summary: 'Add icons experience' })
+  @ApiOperation({ summary: 'Get icon by sort name or colorSchema' })
   @ApiBearerAuth()
   @ApiHeader({
     name: 'Authorization',
@@ -115,7 +115,7 @@ export class IconsSvgController {
   }
 
   // Delete icon
-  @ApiOperation({ summary: 'Add icons experience' })
+  @ApiOperation({ summary: 'Delete icons by id' })
   @ApiBearerAuth()
   @ApiHeader({
     name: 'Authorization',
@@ -135,7 +135,7 @@ export class IconsSvgController {
   @ApiInternalServerErrorResponse({ description: 'Server error' })
   @UseGuards(JwtAuthTokenTypeGuard, RoleGuard)
   @Roles(ERole.ADMIN)
-  @Delete('id')
+  @Delete(':id')
   public async deleteIcon(@Param('id') id: string) {
     return await this.iconSvgService.deleteIcon(id);
   }
