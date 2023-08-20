@@ -13,7 +13,7 @@ import {
 } from 'class-validator';
 
 export class UpdateUserDto {
-  @ApiProperty({ example: 'email', description: 'User  email' })
+  @ApiProperty({ example: 'email@gmail.com', description: 'User  email' })
   @IsNotEmpty()
   @IsString()
   @IsEmail()
@@ -41,13 +41,13 @@ export class UpdateUserDto {
   @IsString()
   lastName_ua: string;
 
-  @ApiProperty({ example: '+380XXXXXXXXX', description: 'User contact phone' })
+  @ApiProperty({ example: '+380998887776', description: 'User contact phone' })
   @IsNotEmpty()
   @IsPhoneNumber()
   phone: string;
 
   @ApiProperty({
-    example: 'Telegram contact',
+    example: 'https://t.me/name',
     description: 'User Telegram contact',
   })
   @IsNotEmpty()
@@ -68,7 +68,19 @@ export class UpdateUserDto {
   linkedinUrl: string;
 
   @ApiProperty({
-    example: 'resume url',
+    example:
+      'https://my-site.netlify.app?id=a70fdfe5-c1b5-4c1c-b603-b4847358d102',
+    description: 'User site url',
+    required: true,
+  })
+  @IsNotEmpty()
+  @Matches(regex.linkRegex, {
+    message: 'This should have been a link',
+  })
+  siteUrl: string;
+
+  @ApiProperty({
+    example: 'https://my-resume.netlify.app',
     description: 'Resume url',
     required: true,
   })
@@ -122,6 +134,26 @@ export class UpdateUserDto {
   @IsNotEmpty()
   @IsString()
   public aboutMe_ua: string;
+}
+
+export class UpdateSampleColorSchemaDto {
+  @ApiProperty({
+    example: 'default',
+    description: 'Color schema site',
+    required: true,
+  })
+  @IsNotEmpty()
+  @IsString()
+  public colorSchema: string;
+
+  @ApiProperty({
+    example: 'default',
+    description: 'Sample site',
+    required: true,
+  })
+  @IsNotEmpty()
+  @IsString()
+  public sample: string;
 }
 
 export class UserResponseDto extends UpdateUserDto {
