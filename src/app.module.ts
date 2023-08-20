@@ -14,6 +14,8 @@ import { UploadModule } from './entities/upload/upload.module';
 import { WorkModule } from './entities/work/work.module';
 import { EducationModule } from './entities/education/education.module';
 import { ProjectModule } from './entities/project/project.module';
+import { AdminModule } from './entities/admin/admin.module';
+import { IconsSvgModule } from './entities/icons-svg/icons-svg.module';
 
 @Module({
   imports: [
@@ -33,6 +35,8 @@ import { ProjectModule } from './entities/project/project.module';
     WorkModule,
     EducationModule,
     ProjectModule,
+    AdminModule,
+    IconsSvgModule,
   ],
   controllers: [],
   providers: [],

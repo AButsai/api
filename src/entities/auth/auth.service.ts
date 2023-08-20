@@ -11,12 +11,12 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import * as pathUrl from '@src/constants/constants';
 import { ERole } from '@src/enums/role.enum';
 import * as bcryptjs from 'bcryptjs';
 import { Repository } from 'typeorm';
 import { v4 } from 'uuid';
 import { AuthDto } from './dto/auth.dto';
-import * as pathUrl from '@src/constants/constants';
 
 @Injectable()
 export class AuthService {
@@ -48,7 +48,7 @@ export class AuthService {
     );
 
     const role = this.roleRepository.create({
-      role: ERole.USER,
+      role: ERole.ADMIN,
     });
 
     const newUser = this.userRepository.create({

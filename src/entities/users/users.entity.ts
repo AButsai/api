@@ -102,6 +102,18 @@ export class UserEntity extends MyBaseEntity {
   public gitUrl: string;
 
   @ApiProperty({
+    example:
+      'https://my-site.netlify.app?id=a70fdfe5-c1b5-4c1c-b603-b4847358d102',
+    description: 'User gitHub url',
+    required: true,
+  })
+  @Column({ name: 'site_url', type: 'varchar', nullable: true })
+  @Matches(regex.linkRegex, {
+    message: 'This should have been a link',
+  })
+  public siteUrl: string;
+
+  @ApiProperty({
     example: 'Beginner/Elementary(A1)',
     description: 'English level',
     required: true,
