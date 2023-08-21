@@ -9,6 +9,7 @@ import {
   BadRequestException,
   ConflictException,
   Injectable,
+  NotFoundException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -58,7 +59,7 @@ export class MailService {
       relations: ['roles'],
     });
     if (!user) {
-      throw new BadRequestException('Email verified');
+      throw new BadRequestException('Email is verified');
     }
     await this.userRepository.update(user.id, {
       verified: true,
@@ -70,6 +71,12 @@ export class MailService {
   // Resend email
   public async resendEmail(email: string, path = 'mail/verify-email') {
     const user = await this.userRepository.findOne({ where: { email } });
+    if (!user) {
+      throw new NotFoundException('User not found');
+    }
+    if (!user.verifyToken) {
+      throw new BadRequestException('Email is verified');
+    }
     const linkForEmail = this.generateUrlForEmailSend(
       email,
       user.verifyToken,
