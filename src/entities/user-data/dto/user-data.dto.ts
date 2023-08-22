@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-class ContactDto {
+class ContactDataDto {
   @ApiProperty()
   id: string;
 
@@ -14,7 +14,7 @@ class ContactDto {
   svg: string;
 }
 
-class WorkDto {
+class WorkDataDto {
   @ApiProperty()
   id: string;
 
@@ -46,7 +46,7 @@ class WorkDto {
   technologies: string;
 }
 
-class EducationDto {
+class EducationDataDto {
   @ApiProperty()
   id: string;
 
@@ -72,7 +72,7 @@ class EducationDto {
   address: string;
 }
 
-class ProjectDto {
+class ProjectDataDto {
   @ApiProperty()
   id: string;
 
@@ -159,15 +159,18 @@ export class UserDataResponseDto {
   @ApiProperty()
   resume: string;
 
-  @ApiProperty({ type: [ContactDto] })
-  contacts: ContactDto[];
+  @ApiProperty()
+  public userAgreement: boolean;
 
-  @ApiProperty({ type: [WorkDto] })
-  works: WorkDto[];
+  @ApiProperty({ type: [ContactDataDto] })
+  contacts: ContactDataDto[];
 
-  @ApiProperty({ type: [EducationDto] })
-  educations: EducationDto[];
+  @ApiProperty({ type: [WorkDataDto] })
+  works: WorkDataDto[];
 
-  @ApiProperty({ type: [ProjectDto] })
-  projects: ProjectDto[];
+  @ApiProperty({ type: [EducationDataDto] })
+  educations: EducationDataDto[];
+
+  @ApiProperty({ type: [ProjectDataDto] })
+  projects: ProjectDataDto[];
 }

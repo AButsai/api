@@ -76,7 +76,7 @@ export class AdminController {
       format: 'Bearer YOUR_TOKEN_HERE',
     },
   })
-  @ApiOkResponse({ type: AdminResponseDto })
+  @ApiOkResponse({ type: [AdminResponseDto] })
   @ApiNotFoundResponse({ description: 'Not found' })
   @ApiUnauthorizedResponse({
     description:

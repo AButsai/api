@@ -29,4 +29,7 @@ export class AdminResponseDto {
     required: true,
   })
   public sample: string;
+
+  @ApiProperty({ example: false, description: 'User agreement' })
+  public userAgreement: boolean;
 }
