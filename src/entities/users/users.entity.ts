@@ -132,6 +132,10 @@ export class UserEntity extends MyBaseEntity {
   })
   public resume: string;
 
+  @ApiProperty({ example: false, description: 'User agreement' })
+  @Column({ name: 'user_agreement', type: 'boolean', default: false })
+  public userAgreement: boolean;
+
   // Contacts and social
   @ApiProperty({ example: 'email@mail.com', description: 'User  email' })
   @Column({ name: 'email', type: 'varchar' })
