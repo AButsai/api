@@ -4,6 +4,7 @@ import { WorkDto } from '@entities/work/dto/work.dto';
 import { ApiProperty } from '@nestjs/swagger';
 import * as regex from '@utils/regex-expressions';
 import {
+  IsBoolean,
   IsEmail,
   IsNotEmpty,
   IsPhoneNumber,
@@ -194,6 +195,10 @@ export class UpdateUserDto {
   @IsString()
   @IsNotEmpty()
   public whatsapp: string;
+
+  @ApiProperty({ example: false, description: 'User agreement' })
+  @IsBoolean()
+  public userAgreement: boolean;
 }
 
 export class UpdateSampleColorSchemaDto {
