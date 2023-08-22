@@ -2,7 +2,11 @@ import { TokensService } from '@entities/tokens/tokens.service';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { UpdateSampleColorSchemaDto, UpdateUserDto } from './dto/users.dto';
+import {
+  UpdateSampleColorSchemaDto,
+  UpdateUserAgreementDto,
+  UpdateUserDto,
+} from './dto/users.dto';
 import { UserEntity } from './users.entity';
 
 @Injectable()
@@ -30,7 +34,7 @@ export class UsersService {
   // Update user
   public async update(
     id: string,
-    body: UpdateUserDto | UpdateSampleColorSchemaDto,
+    body: UpdateUserDto | UpdateSampleColorSchemaDto | UpdateUserAgreementDto,
   ) {
     const user = await this.userRepository.findOne({ where: { id } });
     Object.assign(user, body);

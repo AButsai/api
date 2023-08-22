@@ -14,6 +14,7 @@ import { MyRequest } from '@src/types/request.interface';
 import {
   ResponseDto,
   UpdateSampleColorSchemaDto,
+  UpdateUserAgreementDto,
   UpdateUserDto,
 } from './dto/users.dto';
 import { UsersService } from './users.service';
@@ -112,6 +113,42 @@ export class UsersController {
   public async updateSampleAndColorSchema(
     @Req() req: MyRequest,
     @Body() body: UpdateSampleColorSchemaDto,
+  ) {
+    const { user, accessToken, refreshToken } = await this.userService.update(
+      req.user.id,
+      body,
+    );
+    return {
+      refreshToken,
+      accessToken,
+      user,
+    };
+  }
+
+  // Update user agreement
+  @ApiOperation({ summary: 'Update user agreement' })
+  @ApiBearerAuth()
+  @ApiHeader({
+    name: 'Authorization',
+    description: 'token-type: access_token',
+    required: true,
+    schema: {
+      type: 'string',
+      format: 'Bearer YOUR_TOKEN_HERE',
+    },
+  })
+  @ApiResponse({ status: 200, type: ResponseDto })
+  @ApiNotFoundResponse({ description: 'Not found' })
+  @ApiUnauthorizedResponse({
+    description:
+      'Not authorized jwt expired || Not authorized Invalid token type',
+  })
+  @ApiInternalServerErrorResponse({ description: 'Server error' })
+  @UseGuards(JwtAuthTokenTypeGuard)
+  @Patch('update-user-agreement')
+  public async updateUserAgreement(
+    @Req() req: MyRequest,
+    @Body() body: UpdateUserAgreementDto,
   ) {
     const { user, accessToken, refreshToken } = await this.userService.update(
       req.user.id,

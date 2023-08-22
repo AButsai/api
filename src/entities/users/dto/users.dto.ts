@@ -195,10 +195,6 @@ export class UpdateUserDto {
   @IsString()
   @IsNotEmpty()
   public whatsapp: string;
-
-  @ApiProperty({ example: false, description: 'User agreement' })
-  @IsBoolean()
-  public userAgreement: boolean;
 }
 
 export class UpdateSampleColorSchemaDto {
@@ -219,6 +215,12 @@ export class UpdateSampleColorSchemaDto {
   @IsNotEmpty()
   @IsString()
   public sample: string;
+}
+
+export class UpdateUserAgreementDto {
+  @ApiProperty({ example: false, description: 'User agreement' })
+  @IsBoolean()
+  public userAgreement: boolean;
 }
 
 export class UserResponseDto extends UpdateUserDto {
