@@ -16,6 +16,7 @@ import {
   UpdateSampleColorSchemaDto,
   UpdateUserAgreementDto,
   UpdateUserDto,
+  UserResponseDto,
 } from './dto/users.dto';
 import { UsersService } from './users.service';
 
@@ -68,7 +69,7 @@ export class UsersController {
       format: 'Bearer YOUR_TOKEN_HERE',
     },
   })
-  @ApiResponse({ status: 200, type: ResponseDto })
+  @ApiResponse({ status: 200, type: UserResponseDto })
   @ApiNotFoundResponse({ description: 'Not found' })
   @ApiUnauthorizedResponse({
     description:
@@ -78,13 +79,8 @@ export class UsersController {
   @UseGuards(JwtAuthTokenTypeGuard)
   @Patch('update')
   public async updateUser(@Req() req: MyRequest, @Body() body: UpdateUserDto) {
-    const { user, accessToken, refreshToken } = await this.userService.update(
-      req.user.id,
-      body,
-    );
+    const { user } = await this.userService.update(req.user.id, body);
     return {
-      refreshToken,
-      accessToken,
       user,
     };
   }
@@ -101,7 +97,7 @@ export class UsersController {
       format: 'Bearer YOUR_TOKEN_HERE',
     },
   })
-  @ApiResponse({ status: 200, type: ResponseDto })
+  @ApiResponse({ status: 200, type: UserResponseDto })
   @ApiNotFoundResponse({ description: 'Not found' })
   @ApiUnauthorizedResponse({
     description:
@@ -114,13 +110,8 @@ export class UsersController {
     @Req() req: MyRequest,
     @Body() body: UpdateSampleColorSchemaDto,
   ) {
-    const { user, accessToken, refreshToken } = await this.userService.update(
-      req.user.id,
-      body,
-    );
+    const { user } = await this.userService.update(req.user.id, body);
     return {
-      refreshToken,
-      accessToken,
       user,
     };
   }
@@ -137,7 +128,7 @@ export class UsersController {
       format: 'Bearer YOUR_TOKEN_HERE',
     },
   })
-  @ApiResponse({ status: 200, type: ResponseDto })
+  @ApiResponse({ status: 200, type: UserResponseDto })
   @ApiNotFoundResponse({ description: 'Not found' })
   @ApiUnauthorizedResponse({
     description:
@@ -150,13 +141,8 @@ export class UsersController {
     @Req() req: MyRequest,
     @Body() body: UpdateUserAgreementDto,
   ) {
-    const { user, accessToken, refreshToken } = await this.userService.update(
-      req.user.id,
-      body,
-    );
+    const { user } = await this.userService.update(req.user.id, body);
     return {
-      refreshToken,
-      accessToken,
       user,
     };
   }
