@@ -224,8 +224,13 @@ export class UpdateUserAgreementDto {
 }
 
 export class UserResponseDto extends UpdateUserDto {
+  @ApiProperty({
+    example: '29be42a1-5318-4535-bd85-f7e34cc03acb',
+    description: 'User id',
+  })
+  public id: string;
+
   @ApiProperty({ example: false, description: 'User agreement' })
-  @IsBoolean()
   public userAgreement: boolean;
 
   @ApiProperty({ type: [WorkDto] })
