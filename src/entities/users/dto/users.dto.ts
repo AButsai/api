@@ -224,6 +224,10 @@ export class UpdateUserAgreementDto {
 }
 
 export class UserResponseDto extends UpdateUserDto {
+  @ApiProperty({ example: false, description: 'User agreement' })
+  @IsBoolean()
+  public userAgreement: boolean;
+
   @ApiProperty({ type: [WorkDto] })
   works: WorkDto;
 
