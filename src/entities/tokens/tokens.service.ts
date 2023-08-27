@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
+import { TUser } from '@src/types/request.interface';
 import { Repository } from 'typeorm';
 import { UserEntity } from '../users/users.entity';
-import { TUser } from '@src/types/request.interface';
 
 @Injectable()
 export class TokensService {
@@ -20,7 +20,7 @@ export class TokensService {
 
     const payload = { email: user.email, id: user.id, roles };
     const accessToken = this.jwtService.sign(payload, {
-      expiresIn: '15d',
+      expiresIn: '15m',
       secret: process.env.ACCESS_TOKEN_PRIVATE_KEY || 'SUCCESS_TOKEN',
     });
 
