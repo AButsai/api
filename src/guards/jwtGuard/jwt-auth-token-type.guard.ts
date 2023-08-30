@@ -32,7 +32,6 @@ export class JwtAuthTokenTypeGuard implements CanActivate {
       }
 
       const tokenType = req.headers['token-type'];
-      console.log('tokenType', tokenType);
       let user: TUser;
       if (tokenType === 'access_token') {
         user = this.jwtService.verify(token, {
@@ -49,6 +48,7 @@ export class JwtAuthTokenTypeGuard implements CanActivate {
       req.user = user;
       return true;
     } catch (e) {
+      console.log('e', e);
       throw new UnauthorizedException(`Not authorized ${e.message}`);
     }
   }
