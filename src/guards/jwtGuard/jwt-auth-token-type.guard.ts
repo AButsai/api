@@ -48,7 +48,6 @@ export class JwtAuthTokenTypeGuard implements CanActivate {
       req.user = user;
       return true;
     } catch (e) {
-      console.log('e', e);
       throw new UnauthorizedException(`Not authorized ${e.message}`);
     }
   }
