@@ -16,7 +16,7 @@ import { ERole } from '@src/enums/role.enum';
 import * as bcryptjs from 'bcryptjs';
 import { Repository } from 'typeorm';
 import { v4 } from 'uuid';
-import { AuthDto } from './dto/auth.dto';
+import { AuthDto, RegisterDto } from './dto/auth.dto';
 
 @Injectable()
 export class AuthService {
@@ -31,8 +31,8 @@ export class AuthService {
   ) {}
 
   // Register
-  public async register(body: AuthDto) {
-    const { email, password } = body;
+  public async register(body: RegisterDto) {
+    const { email, password, userAgreement } = body;
     const user = await this.userRepository.findOne({
       where: { email },
     });
@@ -55,6 +55,7 @@ export class AuthService {
       email,
       password: hashedPassword,
       verifyToken,
+      userAgreement,
     });
     newUser.roles = [role];
     await this.roleRepository.save(role);
