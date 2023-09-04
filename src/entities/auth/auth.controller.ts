@@ -22,7 +22,12 @@ import {
 } from '@nestjs/swagger';
 import { MyRequest } from '@src/types/request.interface';
 import { AuthService } from './auth.service';
-import { AuthDto, AuthResponseDto, LogoutResponseDto } from './dto/auth.dto';
+import {
+  AuthDto,
+  AuthResponseDto,
+  LogoutResponseDto,
+  RegisterDto,
+} from './dto/auth.dto';
 
 @ApiTags('Authentication')
 @Controller('api/auth')
@@ -33,7 +38,7 @@ export class AuthController {
   @Post('register')
   @ApiOperation({ summary: 'Register a new user' })
   @ApiResponse({ status: 201, type: AuthResponseDto })
-  async register(@Body(ValidationPipe) registerUserDto: AuthDto) {
+  async register(@Body(ValidationPipe) registerUserDto: RegisterDto) {
     return this.authService.register(registerUserDto);
   }
 

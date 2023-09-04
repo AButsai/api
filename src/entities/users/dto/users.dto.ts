@@ -217,10 +217,10 @@ export class UpdateSampleColorSchemaDto {
   public sample: string;
 }
 
-export class UpdateUserAgreementDto {
-  @ApiProperty({ example: false, description: 'User agreement' })
+export class UpdateConsentOfUseDto {
+  @ApiProperty({ example: false, description: 'Consent of use' })
   @IsBoolean()
-  public userAgreement: boolean;
+  public consentOfUse: boolean;
 }
 
 export class UserResponseDto extends UpdateUserDto {
@@ -232,6 +232,9 @@ export class UserResponseDto extends UpdateUserDto {
 
   @ApiProperty({ example: false, description: 'User agreement' })
   public userAgreement: boolean;
+
+  @ApiProperty({ example: false, description: 'Consent of use' })
+  public consentOfUse: boolean;
 
   @ApiProperty({ type: [WorkDto] })
   works: WorkDto;

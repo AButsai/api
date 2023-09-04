@@ -136,6 +136,10 @@ export class UserEntity extends MyBaseEntity {
   @Column({ name: 'user_agreement', type: 'boolean', default: false })
   public userAgreement: boolean;
 
+  @ApiProperty({ example: false, description: 'Consent of use' })
+  @Column({ name: 'consent_of_use', type: 'boolean', default: false })
+  public consentOfUse: boolean;
+
   // Contacts and social
   @ApiProperty({ example: 'email@mail.com', description: 'User  email' })
   @Column({ name: 'email', type: 'varchar' })

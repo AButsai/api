@@ -1,6 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import * as regex from '@utils/regex-expressions';
 import {
+  IsBoolean,
   IsEmail,
   IsNotEmpty,
   IsString,
@@ -25,6 +26,13 @@ export class AuthDto {
     message: 'Password must contain letters and numbers',
   })
   password: string;
+}
+
+export class RegisterDto extends AuthDto {
+  @ApiProperty({ example: false, description: 'User agreement' })
+  @IsBoolean()
+  @IsNotEmpty()
+  userAgreement: boolean;
 }
 
 export class AuthResponseDto {
