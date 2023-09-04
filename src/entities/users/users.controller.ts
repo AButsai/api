@@ -14,7 +14,7 @@ import { MyRequest } from '@src/types/request.interface';
 import {
   ResponseDto,
   UpdateSampleColorSchemaDto,
-  UpdateUserAgreementDto,
+  UpdateConsentOfUseDto,
   UpdateUserDto,
   UserResponseDto,
 } from './dto/users.dto';
@@ -117,7 +117,7 @@ export class UsersController {
   }
 
   // Update user agreement
-  @ApiOperation({ summary: 'Update user agreement' })
+  @ApiOperation({ summary: 'Update consent of use' })
   @ApiBearerAuth()
   @ApiHeader({
     name: 'Authorization',
@@ -136,10 +136,10 @@ export class UsersController {
   })
   @ApiInternalServerErrorResponse({ description: 'Server error' })
   @UseGuards(JwtAuthTokenTypeGuard)
-  @Patch('update-user-agreement')
+  @Patch('update-consent-use')
   public async updateUserAgreement(
     @Req() req: MyRequest,
-    @Body() body: UpdateUserAgreementDto,
+    @Body() body: UpdateConsentOfUseDto,
   ) {
     const { user } = await this.userService.update(req.user.id, body);
     return {
