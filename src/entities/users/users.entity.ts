@@ -1,5 +1,6 @@
 import { EducationEntity } from '@entities/education/education.entity';
 import { ProjectEntity } from '@entities/project/project.entity';
+import { SkillsEntity } from '@entities/skills/skills.entity';
 import { WorkEntity } from '@entities/work/work.entity';
 import { ApiProperty } from '@nestjs/swagger';
 import { MyBaseEntity } from '@utils/base.entity';
@@ -239,4 +240,7 @@ export class UserEntity extends MyBaseEntity {
 
   @OneToMany(() => ProjectEntity, (project) => project.user)
   public projects: ProjectEntity[];
+
+  @OneToMany(() => SkillsEntity, (skill) => skill.user)
+  public skills: SkillsEntity;
 }

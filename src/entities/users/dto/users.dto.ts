@@ -40,6 +40,9 @@ export class UpdateUserDto {
   @IsPhoneNumber()
   phone: string;
 
+  @ApiProperty({ example: 'FrontEnd', description: 'Position user' })
+  position: string;
+
   @ApiProperty({
     example: 'https://drive.google.com/drive/u/0/my-drive',
     description: 'Resume url',
