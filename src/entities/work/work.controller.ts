@@ -73,12 +73,9 @@ export class WorkController {
   })
   @ApiInternalServerErrorResponse({ description: 'Server error' })
   @UseGuards(JwtAuthTokenTypeGuard)
-  @Patch(':workId')
-  public async updateWork(
-    @Param('workId') workId: string,
-    @Body() body: WorkDto,
-  ) {
-    return await this.workService.updateWork(workId, body);
+  @Patch(':id')
+  public async updateWork(@Param('id') id: string, @Body() body: WorkDto) {
+    return await this.workService.updateWork(id, body);
   }
 
   // Delete work experience
@@ -101,8 +98,8 @@ export class WorkController {
   })
   @ApiInternalServerErrorResponse({ description: 'Server error' })
   @UseGuards(JwtAuthTokenTypeGuard)
-  @Delete(':workId')
-  public async deleteWork(@Param('workId') workId: string) {
-    return await this.workService.deleteWork(workId);
+  @Delete(':id')
+  public async deleteWork(@Param('id') id: string) {
+    return await this.workService.deleteWork(id);
   }
 }
