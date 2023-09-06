@@ -5,7 +5,6 @@ import { ApiProperty } from '@nestjs/swagger';
 import * as regex from '@utils/regex-expressions';
 import {
   IsBoolean,
-  IsEmail,
   IsNotEmpty,
   IsPhoneNumber,
   IsString,
@@ -14,12 +13,6 @@ import {
 } from 'class-validator';
 
 export class UpdateUserDto {
-  @ApiProperty({ example: 'email@gmail.com', description: 'User  email' })
-  @IsNotEmpty()
-  @IsString()
-  @IsEmail()
-  email: string;
-
   @ApiProperty({ example: 'Mark', description: 'User First name' })
   @IsNotEmpty()
   @IsString()
@@ -52,6 +45,7 @@ export class UpdateUserDto {
     description: 'Resume url',
     required: true,
   })
+  @ValidateIf((object, value) => value !== undefined)
   @IsNotEmpty()
   @Matches(regex.linkRegex, {
     message: 'This should have been a link',
@@ -63,6 +57,7 @@ export class UpdateUserDto {
     description: 'English level',
     required: true,
   })
+  @ValidateIf((object, value) => value !== undefined)
   @IsNotEmpty()
   @IsString()
   englishLevel: string;
@@ -72,6 +67,7 @@ export class UpdateUserDto {
     description: 'Ukraine langue',
     required: true,
   })
+  @ValidateIf((object, value) => value !== undefined)
   @IsNotEmpty()
   @IsString()
   public ukraineLangue: string;
@@ -119,6 +115,7 @@ export class UpdateUserDto {
     description: 'User linkedin url',
     required: true,
   })
+  @ValidateIf((object, value) => value !== undefined)
   @IsNotEmpty()
   @Matches(regex.linkRegex, {
     message: 'This should have been a link',
@@ -130,6 +127,7 @@ export class UpdateUserDto {
     description: 'User gitHub url',
     required: true,
   })
+  @ValidateIf((object, value) => value !== undefined)
   @IsString()
   @IsNotEmpty()
   @Matches(regex.linkRegex, {
