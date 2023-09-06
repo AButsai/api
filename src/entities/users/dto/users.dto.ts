@@ -48,18 +48,6 @@ export class UpdateUserDto {
   phone: string;
 
   @ApiProperty({
-    example:
-      'https://my-site.netlify.app?id=a70fdfe5-c1b5-4c1c-b603-b4847358d102',
-    description: 'User site url',
-    required: true,
-  })
-  @IsNotEmpty()
-  @Matches(regex.linkRegex, {
-    message: 'This should have been a link',
-  })
-  siteResume: string;
-
-  @ApiProperty({
     example: 'https://drive.google.com/drive/u/0/my-drive',
     description: 'Resume url',
     required: true,
@@ -221,6 +209,18 @@ export class UpdateConsentOfUseDto {
   @ApiProperty({ example: false, description: 'Consent of use' })
   @IsBoolean()
   public consentOfUse: boolean;
+
+  @ApiProperty({
+    example:
+      'https://my-site.netlify.app?id=a70fdfe5-c1b5-4c1c-b603-b4847358d102',
+    description: 'User site url',
+    required: true,
+  })
+  @IsNotEmpty()
+  @Matches(regex.linkRegex, {
+    message: 'This should have been a link',
+  })
+  siteResume: string;
 }
 
 export class UserResponseDto extends UpdateUserDto {
