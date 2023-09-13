@@ -9,9 +9,6 @@ export class UploadDto {
   })
   @IsNotEmpty()
   file: Express.Multer.File;
-
-  originalname: string;
-
   path: string;
 }
 
