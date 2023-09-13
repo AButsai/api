@@ -1,4 +1,4 @@
-import { JwtAuthGuard } from '@guards/jwtGuard/jwt-auth.guard';
+import { JwtAuthTokenTypeGuard } from '@guards/jwtGuard/jwt-auth-token-type.guard';
 import {
   Controller,
   Param,
@@ -64,7 +64,7 @@ export class UploadController {
     enum: EUploadPath,
     description: 'Path parameter (can be "files" or "avatars")',
   })
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthTokenTypeGuard)
   @Patch(':path')
   @UseInterceptors(FileInterceptor('file', multerOptions))
   public async uploadAvatar(
