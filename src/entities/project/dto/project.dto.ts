@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import * as regex from '@utils/regex-expressions';
-import { IsNotEmpty, IsString, Matches, ValidateIf } from 'class-validator';
+import { IsString, Matches, ValidateIf } from 'class-validator';
 
 export class ProjectDto {
   @ApiProperty({
@@ -9,7 +9,6 @@ export class ProjectDto {
     required: false,
   })
   @ValidateIf((object, value) => value !== undefined)
-  @IsNotEmpty()
   @Matches(regex.linkRegex, {
     message: 'This should have been a link',
   })
@@ -21,7 +20,6 @@ export class ProjectDto {
     required: false,
   })
   @ValidateIf((object, value) => value !== undefined)
-  @IsNotEmpty()
   @IsString()
   public gitHubNameLink: string;
 
@@ -31,7 +29,6 @@ export class ProjectDto {
     required: false,
   })
   @ValidateIf((object, value) => value !== undefined)
-  @IsNotEmpty()
   @Matches(regex.linkRegex, {
     message: 'This should have been a link',
   })
@@ -43,7 +40,6 @@ export class ProjectDto {
     required: false,
   })
   @ValidateIf((object, value) => value !== undefined)
-  @IsNotEmpty()
   @Matches(regex.linkRegex, {
     message: 'This should have been a link',
   })
@@ -55,7 +51,6 @@ export class ProjectDto {
     required: false,
   })
   @ValidateIf((object, value) => value !== undefined)
-  @IsNotEmpty()
   @IsString()
   public projectNameLink: string;
 
@@ -65,7 +60,6 @@ export class ProjectDto {
     required: false,
   })
   @ValidateIf((object, value) => value !== undefined)
-  @IsNotEmpty()
   @IsString()
   public description: string;
 
@@ -75,7 +69,6 @@ export class ProjectDto {
     required: false,
   })
   @ValidateIf((object, value) => value !== undefined)
-  @IsNotEmpty()
   @IsString()
   public description_ua: string;
 
@@ -85,7 +78,6 @@ export class ProjectDto {
     required: false,
   })
   @ValidateIf((object, value) => value !== undefined)
-  @IsNotEmpty()
   @IsString()
   public technologies: string;
 }
