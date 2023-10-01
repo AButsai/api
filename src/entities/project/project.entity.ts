@@ -2,7 +2,7 @@ import { UserEntity } from '@entities/users/users.entity';
 import { ApiProperty } from '@nestjs/swagger';
 import { MyBaseEntity } from '@utils/base.entity';
 import * as regex from '@utils/regex-expressions';
-import { IsNotEmpty, IsString, Matches } from 'class-validator';
+import { IsNotEmpty, IsString, Matches, ValidateIf } from 'class-validator';
 import { Column, Entity, ManyToOne } from 'typeorm';
 
 @Entity('projects')
@@ -17,6 +17,7 @@ export class ProjectEntity extends MyBaseEntity {
     message: 'This should have been a link',
   })
   @Column({ name: 'git_link', type: 'varchar', nullable: true })
+  @ValidateIf((object, value) => value !== undefined || value !== '')
   public gitHubLink: string;
 
   @ApiProperty({
@@ -24,6 +25,7 @@ export class ProjectEntity extends MyBaseEntity {
     description: 'Name link for GitHub',
     required: false,
   })
+  @ValidateIf((object, value) => value !== undefined || value !== '')
   @IsNotEmpty()
   @IsString()
   @Column({ name: 'name_git_link', type: 'varchar', nullable: true })
@@ -34,6 +36,7 @@ export class ProjectEntity extends MyBaseEntity {
     description: 'Documentation link',
     required: false,
   })
+  @ValidateIf((object, value) => value !== undefined || value !== '')
   @IsNotEmpty()
   @Matches(regex.linkRegex, {
     message: 'This should have been a link',
@@ -46,6 +49,7 @@ export class ProjectEntity extends MyBaseEntity {
     description: 'Project url',
     required: false,
   })
+  @ValidateIf((object, value) => value !== undefined || value !== '')
   @IsNotEmpty()
   @Matches(regex.linkRegex, {
     message: 'This should have been a link',
@@ -58,6 +62,7 @@ export class ProjectEntity extends MyBaseEntity {
     description: 'Name link for project',
     required: false,
   })
+  @ValidateIf((object, value) => value !== undefined || value !== '')
   @IsNotEmpty()
   @IsString()
   @Column({ name: 'name_project_link', type: 'varchar', nullable: true })
@@ -68,6 +73,7 @@ export class ProjectEntity extends MyBaseEntity {
     description: 'Description projects',
     required: false,
   })
+  @ValidateIf((object, value) => value !== undefined || value !== '')
   @IsNotEmpty()
   @IsString()
   @Column({ name: 'description', type: 'varchar', nullable: true })
@@ -78,6 +84,7 @@ export class ProjectEntity extends MyBaseEntity {
     description: 'Description projects',
     required: false,
   })
+  @ValidateIf((object, value) => value !== undefined || value !== '')
   @IsNotEmpty()
   @IsString()
   @Column({ name: 'description_ua', type: 'varchar', nullable: true })
@@ -88,6 +95,7 @@ export class ProjectEntity extends MyBaseEntity {
     description: 'How used technologies',
     required: false,
   })
+  @ValidateIf((object, value) => value !== undefined || value !== '')
   @IsNotEmpty()
   @IsString()
   @Column({ name: 'technologies', type: 'varchar', nullable: true })
