@@ -5,7 +5,7 @@ import { WorkEntity } from '@entities/work/work.entity';
 import { ApiProperty } from '@nestjs/swagger';
 import { MyBaseEntity } from '@utils/base.entity';
 import * as regex from '@utils/regex-expressions';
-import { Matches, MinLength } from 'class-validator';
+import { Matches, MinLength, ValidateIf } from 'class-validator';
 import { Column, Entity, OneToMany, Unique } from 'typeorm';
 import { RoleEntity } from './role.entity';
 
@@ -117,6 +117,7 @@ export class UserEntity extends MyBaseEntity {
     required: true,
   })
   @Column({ name: 'site_resume', type: 'varchar', nullable: true })
+  @ValidateIf((object, value) => value !== undefined || value !== '')
   @Matches(regex.linkRegex, {
     message: 'This should have been a link',
   })
@@ -128,6 +129,7 @@ export class UserEntity extends MyBaseEntity {
     required: true,
   })
   @Column({ name: 'resume', type: 'varchar', nullable: true })
+  @ValidateIf((object, value) => value !== undefined || value !== '')
   @Matches(regex.linkRegex, {
     message: 'This should have been a link',
   })
@@ -150,6 +152,7 @@ export class UserEntity extends MyBaseEntity {
   @ApiProperty({ example: '+380999999999', description: 'User contact phone' })
   @Column({ name: 'phone', type: 'varchar', nullable: true })
   @Unique(['phone'])
+  @ValidateIf((object, value) => value !== undefined || value !== '')
   @Matches(regex.phoneRegex, {
     message: 'Contact phone must be in the format "+380999999999"',
   })
@@ -160,6 +163,7 @@ export class UserEntity extends MyBaseEntity {
     description: 'User Telegram contact',
   })
   @Column({ name: 'telegram', type: 'varchar', nullable: true })
+  @ValidateIf((object, value) => value !== undefined || value !== '')
   @Matches(regex.telegramRegex, {
     message: 'Telegram contact must be in the format "https://t.me/name"',
   })
@@ -171,6 +175,7 @@ export class UserEntity extends MyBaseEntity {
     required: true,
   })
   @Column({ name: 'linkedin', type: 'varchar', nullable: true })
+  @ValidateIf((object, value) => value !== undefined || value !== '')
   @Matches(regex.linkRegex, {
     message: 'This should have been a link',
   })
@@ -182,6 +187,7 @@ export class UserEntity extends MyBaseEntity {
     required: true,
   })
   @Column({ name: 'github', type: 'varchar', nullable: true })
+  @ValidateIf((object, value) => value !== undefined || value !== '')
   @Matches(regex.linkRegex, {
     message: 'This should have been a link',
   })
@@ -193,6 +199,7 @@ export class UserEntity extends MyBaseEntity {
     required: true,
   })
   @Column({ name: 'facebook', type: 'varchar', nullable: true })
+  @ValidateIf((object, value) => value !== undefined || value !== '')
   @Matches(regex.linkRegex, {
     message: 'This should have been a link',
   })
@@ -204,6 +211,7 @@ export class UserEntity extends MyBaseEntity {
     required: true,
   })
   @Column({ name: 'instagram', type: 'varchar', nullable: true })
+  @ValidateIf((object, value) => value !== undefined || value !== '')
   @Matches(regex.linkRegex, {
     message: 'This should have been a link',
   })
@@ -212,6 +220,7 @@ export class UserEntity extends MyBaseEntity {
   @ApiProperty({ example: '+380999999999', description: 'User contact viber' })
   @Column({ name: 'viber', type: 'varchar', nullable: true })
   @Unique(['viber'])
+  @ValidateIf((object, value) => value !== undefined || value !== '')
   @Matches(regex.phoneRegex, {
     message: 'Contact phone must be in the format "+380999999999"',
   })
@@ -223,6 +232,7 @@ export class UserEntity extends MyBaseEntity {
   })
   @Column({ name: 'whatsapp', type: 'varchar', nullable: true })
   @Unique(['whatsapp'])
+  @ValidateIf((object, value) => value !== undefined || value !== '')
   @Matches(regex.phoneRegex, {
     message: 'Contact phone must be in the format "+380999999999"',
   })
