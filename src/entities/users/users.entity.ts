@@ -154,7 +154,7 @@ export class UserEntity extends MyBaseEntity {
   @Unique(['phone'])
   @ValidateIf((object, value) => value !== undefined || value !== '')
   @Matches(regex.phoneRegex, {
-    message: 'Contact phone must be in the format "+380999999999"',
+    message: 'Contact phone must be in the format "+380999999999" phone',
   })
   public phone: string;
 
@@ -177,7 +177,7 @@ export class UserEntity extends MyBaseEntity {
   @Column({ name: 'linkedin', type: 'varchar', nullable: true })
   @ValidateIf((object, value) => value !== undefined || value !== '')
   @Matches(regex.linkRegex, {
-    message: 'This should have been a link',
+    message: 'This should have been a link linkedin',
   })
   public linkedin: string;
 
@@ -189,7 +189,7 @@ export class UserEntity extends MyBaseEntity {
   @Column({ name: 'github', type: 'varchar', nullable: true })
   @ValidateIf((object, value) => value !== undefined || value !== '')
   @Matches(regex.linkRegex, {
-    message: 'This should have been a link',
+    message: 'This should have been a link github',
   })
   public github: string;
 
@@ -201,7 +201,7 @@ export class UserEntity extends MyBaseEntity {
   @Column({ name: 'facebook', type: 'varchar', nullable: true })
   @ValidateIf((object, value) => value !== undefined || value !== '')
   @Matches(regex.linkRegex, {
-    message: 'This should have been a link',
+    message: 'This should have been a link facebook',
   })
   public facebook: string;
 
@@ -213,7 +213,7 @@ export class UserEntity extends MyBaseEntity {
   @Column({ name: 'instagram', type: 'varchar', nullable: true })
   @ValidateIf((object, value) => value !== undefined || value !== '')
   @Matches(regex.linkRegex, {
-    message: 'This should have been a link',
+    message: 'This should have been a link instagram',
   })
   public instagram: string;
 
@@ -222,7 +222,7 @@ export class UserEntity extends MyBaseEntity {
   @Unique(['viber'])
   @ValidateIf((object, value) => value !== undefined || value !== '')
   @Matches(regex.phoneRegex, {
-    message: 'Contact phone must be in the format "+380999999999"',
+    message: 'Contact phone must be in the format "+380999999999" viber',
   })
   public viber: string;
 
@@ -234,7 +234,7 @@ export class UserEntity extends MyBaseEntity {
   @Unique(['whatsapp'])
   @ValidateIf((object, value) => value !== undefined || value !== '')
   @Matches(regex.phoneRegex, {
-    message: 'Contact phone must be in the format "+380999999999"',
+    message: 'Contact phone must be in the format "+380999999999" whatsapp',
   })
   public whatsapp: string;
 
