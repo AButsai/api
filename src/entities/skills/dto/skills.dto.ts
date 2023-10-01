@@ -6,7 +6,7 @@ export class SkillsDto {
     example: ['HTML, CSS, JS, REACT'],
     description: 'Tech skills',
   })
-  @ValidateIf((object, value) => value !== undefined || value !== '')
+  @ValidateIf((object, value) => value !== undefined && value !== '')
   @IsArray()
   public techSkills: string[];
 
@@ -14,7 +14,7 @@ export class SkillsDto {
     example: ['Communication, Teamwork, Decision-making'],
     description: 'Soft skills',
   })
-  @ValidateIf((object, value) => value !== undefined || value !== '')
+  @ValidateIf((object, value) => value !== undefined && value !== '')
   @IsArray()
   public softSkills: string[];
 
@@ -22,7 +22,7 @@ export class SkillsDto {
     example: ['English — beginner, Ukrainian — native'],
     description: 'Language skills',
   })
-  @ValidateIf((object, value) => value !== undefined || value !== '')
+  @ValidateIf((object, value) => value !== undefined && value !== '')
   @IsArray()
   public languageSkills: string[];
 }

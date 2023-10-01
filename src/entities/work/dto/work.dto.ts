@@ -34,7 +34,7 @@ export class WorkDto {
     example: 'Апі для збереження контактів',
     description: 'Для чого цей застосунок',
   })
-  @ValidateIf((object, value) => value !== undefined || value !== '')
+  @ValidateIf((object, value) => value !== undefined && value !== '')
   @IsString()
   public descriptionWork_ua: string;
 
