@@ -36,7 +36,6 @@ export class WorkDto {
   })
   @ValidateIf((object, value) => value !== undefined)
   @IsString()
-  @IsNotEmpty()
   public descriptionWork_ua: string;
 
   @ApiProperty({
