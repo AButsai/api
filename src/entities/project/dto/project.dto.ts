@@ -8,7 +8,7 @@ export class ProjectDto {
     description: 'User GitHub url',
     required: false,
   })
-  @ValidateIf((object, value) => value !== undefined)
+  @ValidateIf((object, value) => value !== undefined || value !== '')
   @Matches(regex.linkRegex, {
     message: 'This should have been a link',
   })
@@ -19,7 +19,7 @@ export class ProjectDto {
     description: 'Name link for GitHub',
     required: false,
   })
-  @ValidateIf((object, value) => value !== undefined)
+  @ValidateIf((object, value) => value !== undefined || value !== '')
   @IsString()
   public gitHubNameLink: string;
 
@@ -28,7 +28,7 @@ export class ProjectDto {
     description: 'Documentation link',
     required: false,
   })
-  @ValidateIf((object, value) => value !== undefined)
+  @ValidateIf((object, value) => value !== undefined || value !== '')
   @Matches(regex.linkRegex, {
     message: 'This should have been a link',
   })
@@ -39,7 +39,7 @@ export class ProjectDto {
     description: 'Project url',
     required: false,
   })
-  @ValidateIf((object, value) => value !== undefined)
+  @ValidateIf((object, value) => value !== undefined || value !== '')
   @Matches(regex.linkRegex, {
     message: 'This should have been a link',
   })
@@ -50,7 +50,7 @@ export class ProjectDto {
     description: 'Name link for project',
     required: false,
   })
-  @ValidateIf((object, value) => value !== undefined)
+  @ValidateIf((object, value) => value !== undefined || value !== '')
   @IsString()
   public projectNameLink: string;
 
@@ -59,7 +59,7 @@ export class ProjectDto {
     description: 'Description projects',
     required: false,
   })
-  @ValidateIf((object, value) => value !== undefined)
+  @ValidateIf((object, value) => value !== undefined || value !== '')
   @IsString()
   public description: string;
 
@@ -68,7 +68,7 @@ export class ProjectDto {
     description: 'Описання проекту',
     required: false,
   })
-  @ValidateIf((object, value) => value !== undefined)
+  @ValidateIf((object, value) => value !== undefined || value !== '')
   @IsString()
   public description_ua: string;
 
@@ -77,7 +77,7 @@ export class ProjectDto {
     description: 'How used technologies',
     required: false,
   })
-  @ValidateIf((object, value) => value !== undefined)
+  @ValidateIf((object, value) => value !== undefined || value !== '')
   @IsString()
   public technologies: string;
 }
