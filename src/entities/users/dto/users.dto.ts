@@ -20,7 +20,6 @@ export class UpdateUserDto {
 
   @ApiProperty({ example: 'Павло', description: 'User First name' })
   @ValidateIf((object, value) => value !== undefined)
-  @IsNotEmpty()
   @IsString()
   firstName_ua: string;
 
@@ -31,7 +30,6 @@ export class UpdateUserDto {
 
   @ApiProperty({ example: 'Наливайко', description: 'User Last name' })
   @ValidateIf((object, value) => value !== undefined)
-  @IsNotEmpty()
   @IsString()
   lastName_ua: string;
 
@@ -49,7 +47,6 @@ export class UpdateUserDto {
     required: true,
   })
   @ValidateIf((object, value) => value !== undefined)
-  @IsNotEmpty()
   @Matches(regex.linkRegex, {
     message: 'This should have been a link',
   })
@@ -61,7 +58,6 @@ export class UpdateUserDto {
     required: true,
   })
   @ValidateIf((object, value) => value !== undefined)
-  @IsNotEmpty()
   @IsString()
   englishLevel: string;
 
@@ -71,7 +67,6 @@ export class UpdateUserDto {
     required: true,
   })
   @ValidateIf((object, value) => value !== undefined)
-  @IsNotEmpty()
   @IsString()
   public ukraineLangue: string;
 
@@ -81,7 +76,6 @@ export class UpdateUserDto {
     required: true,
   })
   @ValidateIf((object, value) => value !== undefined)
-  @IsNotEmpty()
   @IsString()
   public russianLangue: string;
 
@@ -98,7 +92,6 @@ export class UpdateUserDto {
     description: 'Position user',
   })
   @ValidateIf((object, value) => value !== undefined)
-  @IsNotEmpty()
   @IsString()
   public aboutMe_ua: string;
 
@@ -107,7 +100,6 @@ export class UpdateUserDto {
     description: 'User Telegram contact',
   })
   @ValidateIf((object, value) => value !== undefined)
-  @IsNotEmpty()
   @Matches(regex.telegramRegex, {
     message: 'Telegram contact must be in the format "https://t.me/name"',
   })
@@ -119,7 +111,6 @@ export class UpdateUserDto {
     required: true,
   })
   @ValidateIf((object, value) => value !== undefined)
-  @IsNotEmpty()
   @Matches(regex.linkRegex, {
     message: 'This should have been a link',
   })
@@ -132,7 +123,6 @@ export class UpdateUserDto {
   })
   @ValidateIf((object, value) => value !== undefined)
   @IsString()
-  @IsNotEmpty()
   @Matches(regex.linkRegex, {
     message: 'This should have been a link',
   })
@@ -148,7 +138,6 @@ export class UpdateUserDto {
     message: 'This should have been a link',
   })
   @IsString()
-  @IsNotEmpty()
   public facebook: string;
 
   @ApiProperty({
@@ -161,7 +150,6 @@ export class UpdateUserDto {
     message: 'This should have been a link',
   })
   @IsString()
-  @IsNotEmpty()
   public instagram: string;
 
   @ApiProperty({ example: '+380999999999', description: 'User contact viber' })
@@ -170,7 +158,6 @@ export class UpdateUserDto {
     message: 'Contact phone must be in the format "+380999999999"',
   })
   @IsString()
-  @IsNotEmpty()
   public viber: string;
 
   @ApiProperty({
@@ -182,7 +169,6 @@ export class UpdateUserDto {
     message: 'Contact phone must be in the format "+380999999999"',
   })
   @IsString()
-  @IsNotEmpty()
   public whatsapp: string;
 }
 
