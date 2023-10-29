@@ -3,8 +3,8 @@ import { ProjectEntity } from '@entities/project/project.entity';
 import { SkillsEntity } from '@entities/skills/skills.entity';
 import { WorkEntity } from '@entities/work/work.entity';
 import { ApiProperty } from '@nestjs/swagger';
-import { MyBaseEntity } from '@utils/base.entity';
-import * as regex from '@utils/regex-expressions';
+import { MyBaseEntity } from '@src/base/base.entity';
+import * as regex from '@src/constants/regex-expressions';
 import { Matches, MinLength, ValidateIf } from 'class-validator';
 import { Column, Entity, OneToMany, Unique } from 'typeorm';
 import { RoleEntity } from './role.entity';
@@ -20,9 +20,16 @@ export class UserEntity extends MyBaseEntity {
   public password: string;
 
   // Data
-  @ApiProperty({ example: 'URL', description: 'User avatar' })
+  @ApiProperty({
+    example: 'avatars/uhyuxeaffdmz01ldiuma',
+    description: 'Avatar public id',
+  })
   @Column({ name: 'avatar_url', type: 'varchar', nullable: true })
   public avatarURL: string;
+
+  @ApiProperty({ example: 'URL', description: 'User avatar' })
+  @Column({ name: 'avatar_public_id', type: 'varchar', nullable: true })
+  public avatarPublicId: string;
 
   @ApiProperty({ example: 'Mark', description: 'User First name' })
   @Column({ name: 'first_name', type: 'varchar', nullable: true })

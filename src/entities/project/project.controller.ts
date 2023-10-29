@@ -4,6 +4,7 @@ import {
   Controller,
   Delete,
   Param,
+  ParseIntPipe,
   Patch,
   Post,
   Req,
@@ -75,7 +76,7 @@ export class ProjectController {
   @UseGuards(JwtAuthTokenTypeGuard)
   @Patch(':id')
   public async updateProject(
-    @Param('id') id: string,
+    @Param('id', ParseIntPipe) id: number,
     @Body() body: ProjectDto,
   ) {
     return await this.projectService.updateProject(id, body);
@@ -102,7 +103,7 @@ export class ProjectController {
   @ApiInternalServerErrorResponse({ description: 'Server error' })
   @UseGuards(JwtAuthTokenTypeGuard)
   @Delete(':id')
-  public async deleteProject(@Param('id') id: string) {
+  public async deleteProject(@Param('id', ParseIntPipe) id: number) {
     return await this.projectService.deleteProject(id);
   }
 }

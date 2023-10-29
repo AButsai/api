@@ -3,6 +3,7 @@ import {
   Body,
   Controller,
   Param,
+  ParseIntPipe,
   Patch,
   Post,
   Req,
@@ -73,7 +74,10 @@ export class SkillsController {
   @ApiInternalServerErrorResponse({ description: 'Server error' })
   @UseGuards(JwtAuthTokenTypeGuard)
   @Patch(':id')
-  public async updateSkills(@Param('id') id: string, @Body() body: SkillsDto) {
+  public async updateSkills(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() body: SkillsDto,
+  ) {
     return await this.skillsService.updateSkills(id, body);
   }
 }

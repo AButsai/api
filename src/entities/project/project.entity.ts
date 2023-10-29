@@ -1,7 +1,7 @@
 import { UserEntity } from '@entities/users/users.entity';
 import { ApiProperty } from '@nestjs/swagger';
-import { MyBaseEntity } from '@utils/base.entity';
-import * as regex from '@utils/regex-expressions';
+import { MyBaseEntity } from '@src/base/base.entity';
+import * as regex from '@src/constants/regex-expressions';
 import { IsNotEmpty, IsString, Matches, ValidateIf } from 'class-validator';
 import { Column, Entity, ManyToOne } from 'typeorm';
 
