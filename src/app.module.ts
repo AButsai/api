@@ -18,6 +18,7 @@ import { AdminModule } from './entities/admin/admin.module';
 import { IconsSvgModule } from './entities/icons-svg/icons-svg.module';
 import { UserDataModule } from './entities/user-data/user-data.module';
 import { SkillsModule } from './entities/skills/skills.module';
+import { CloudinaryModule } from './entities/cloudinary/cloudinary.module';
 
 @Module({
   imports: [
@@ -41,6 +42,7 @@ import { SkillsModule } from './entities/skills/skills.module';
     IconsSvgModule,
     UserDataModule,
     SkillsModule,
+    CloudinaryModule,
   ],
   controllers: [],
   providers: [],

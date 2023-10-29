@@ -1,3 +1,4 @@
+import { multerOptions } from '@entities/cloudinary/configs/multer.config';
 import { JwtAuthTokenTypeGuard } from '@guards/jwtGuard/jwt-auth-token-type.guard';
 import {
   Controller,
@@ -24,7 +25,6 @@ import {
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
 import { MyRequest } from '@src/types/request.interface';
-import { multerOptions } from './config/multer.config';
 import { UploadDto, UploadFileResponseDto } from './dto/upload.dto';
 import { EUploadPath } from './enums/upload.enum';
 import { UploadService } from './upload.service';
