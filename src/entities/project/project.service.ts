@@ -15,7 +15,7 @@ export class ProjectService {
   ) {}
 
   // Create project experience
-  public async createProject(userId: string, body: ProjectDto) {
+  public async createProject(userId: number, body: ProjectDto) {
     const user = await this.userRepository.findOne({ where: { id: userId } });
     if (!user) {
       throw new NotFoundException();
@@ -30,7 +30,7 @@ export class ProjectService {
   }
 
   // Update project experience
-  public async updateProject(id: string, body: ProjectDto) {
+  public async updateProject(id: number, body: ProjectDto) {
     const project = await this.projectRepository.findOne({ where: { id } });
     if (!project) {
       throw new NotFoundException();
@@ -41,7 +41,7 @@ export class ProjectService {
   }
 
   // Delete project experience
-  public async deleteProject(id: string) {
+  public async deleteProject(id: number) {
     await this.projectRepository.delete(id);
     return { message: 'Project experience deleted' };
   }

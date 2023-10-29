@@ -2,7 +2,7 @@ import { EducationDto } from '@entities/education/dto/education.dto';
 import { ProjectDto } from '@entities/project/dto/project.dto';
 import { WorkDto } from '@entities/work/dto/work.dto';
 import { ApiProperty } from '@nestjs/swagger';
-import * as regex from '@utils/regex-expressions';
+import * as regex from '@src/constants/regex-expressions';
 import {
   IsBoolean,
   IsNotEmpty,

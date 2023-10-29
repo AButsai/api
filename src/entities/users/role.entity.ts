@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { MyBaseEntity } from '@src/base/base.entity';
 import { ERole } from '@src/enums/role.enum';
-import { MyBaseEntity } from '@utils/base.entity';
-import { Column, Entity, ManyToMany, ManyToOne } from 'typeorm';
+import { Column, Entity, ManyToOne } from 'typeorm';
 import { UserEntity } from './users.entity';
 
 @Entity('roles')

@@ -17,7 +17,7 @@ export class IconsSvgService {
   ) {}
 
   // Add icon
-  public async addIcon(userId: string, body: IconsSvgDto) {
+  public async addIcon(userId: number, body: IconsSvgDto) {
     const user = await this.userRepository.findOne({ where: { id: userId } });
     if (!user) {
       throw new NotFoundException();
@@ -31,7 +31,7 @@ export class IconsSvgService {
   }
 
   // Update icon
-  public async updateIcon(iconId: string, body: IconsSvgDto) {
+  public async updateIcon(iconId: number, body: IconsSvgDto) {
     const icon = await this.iconSvgRepository.findOne({
       where: { id: iconId },
     });
@@ -45,7 +45,7 @@ export class IconsSvgService {
 
   // Get icon by sort name or colorSchema
   public async getAllIcons(
-    userId: string,
+    userId: number,
     name: ENameContacts,
     color: EColorSchema,
   ) {
@@ -65,7 +65,7 @@ export class IconsSvgService {
   }
 
   // Delete icon
-  public async deleteIcon(iconId: string) {
+  public async deleteIcon(iconId: number) {
     await this.iconSvgRepository.delete(iconId);
     return { message: 'Icon deleted' };
   }

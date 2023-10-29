@@ -34,7 +34,7 @@ export class AttemptsService {
     }
   }
 
-  async updateAttempts(id: string, att: number) {
+  async updateAttempts(id: number, att: number) {
     await this.attemptRepository.update(id, { attempts: att + 1 });
   }
 
@@ -42,7 +42,7 @@ export class AttemptsService {
     await this.attemptRepository.delete({ ip: userIp });
   }
 
-  private async processingAttempts(id: string) {
+  private async processingAttempts(id: number) {
     const ip = await this.attemptRepository.findOne({ where: { id } });
     if (ip.attempts >= this.MAXIMUM_NUMBER_OF_ATTEMPTS) {
       const currentDate = new Date();

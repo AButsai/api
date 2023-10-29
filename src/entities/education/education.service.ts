@@ -15,7 +15,7 @@ export class EducationService {
   ) {}
 
   // Create education experience
-  public async createEducation(userId: string, body: EducationDto) {
+  public async createEducation(userId: number, body: EducationDto) {
     const user = await this.userRepository.findOne({ where: { id: userId } });
     if (!user) {
       throw new NotFoundException();
@@ -30,7 +30,7 @@ export class EducationService {
   }
 
   // Update education experience
-  public async updateEducation(id: string, body: EducationDto) {
+  public async updateEducation(id: number, body: EducationDto) {
     const education = await this.educationRepository.findOne({ where: { id } });
     if (!education) {
       throw new NotFoundException();
@@ -41,7 +41,7 @@ export class EducationService {
   }
 
   // Delete education experience
-  public async deleteEducation(id: string) {
+  public async deleteEducation(id: number) {
     await this.educationRepository.delete(id);
     return { message: 'Education deleted' };
   }

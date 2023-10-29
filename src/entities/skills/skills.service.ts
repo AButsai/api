@@ -14,7 +14,7 @@ export class SkillsService {
     private readonly skillsRepository: Repository<SkillsEntity>,
   ) {}
 
-  public async createSkills(id: string, body: SkillsDto) {
+  public async createSkills(id: number, body: SkillsDto) {
     const user = await this.getUser(id);
     const newSkills = this.skillsRepository.create({
       ...body,
@@ -25,7 +25,7 @@ export class SkillsService {
     return newSkills;
   }
 
-  public async updateSkills(skillId: string, body: SkillsDto) {
+  public async updateSkills(skillId: number, body: SkillsDto) {
     const skills = await this.skillsRepository.findOne({
       where: { id: skillId },
     });
@@ -39,7 +39,7 @@ export class SkillsService {
   }
 
   // Get user
-  private async getUser(id: string) {
+  private async getUser(id: number) {
     const user = await this.userRepository.findOne({ where: { id } });
     if (!user) {
       throw new NotFoundException('Not found');

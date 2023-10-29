@@ -14,7 +14,7 @@ export class AdminService {
 
   // Get all users
   public async getAllUsers(
-    userId: string,
+    userId: number,
     page: number,
     limit: number,
     color: EColorSchema,

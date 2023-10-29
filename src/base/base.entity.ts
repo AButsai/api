@@ -8,11 +8,11 @@ import {
 
 export class MyBaseEntity extends BaseEntity {
   @ApiProperty({
-    example: '1kvgfckkkkghlllljhfhjkkjhv',
+    example: 1,
     description: 'Unique id',
   })
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
+  @PrimaryGeneratedColumn()
+  id: number;
 
   @ApiProperty({
     example: '2023-05-27T13:27:44.787Z',

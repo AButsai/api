@@ -72,7 +72,7 @@ export class AuthService {
   }
 
   // Logout
-  public async logout(id: string) {
+  public async logout(id: number) {
     await this.userRepository.update(id, { refreshToken: null });
   }
 

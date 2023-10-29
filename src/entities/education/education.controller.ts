@@ -4,6 +4,7 @@ import {
   Controller,
   Delete,
   Param,
+  ParseIntPipe,
   Patch,
   Post,
   Req,
@@ -78,7 +79,7 @@ export class EducationController {
   @UseGuards(JwtAuthTokenTypeGuard)
   @Patch(':id')
   public async updateEducation(
-    @Param('id') id: string,
+    @Param('id', ParseIntPipe) id: number,
     @Body() body: EducationDto,
   ) {
     return await this.educationService.updateEducation(id, body);
@@ -105,7 +106,7 @@ export class EducationController {
   @ApiInternalServerErrorResponse({ description: 'Server error' })
   @UseGuards(JwtAuthTokenTypeGuard)
   @Delete(':id')
-  public async deleteEducation(@Param('id') id: string) {
+  public async deleteEducation(@Param('id', ParseIntPipe) id: number) {
     return await this.educationService.deleteEducation(id);
   }
 }

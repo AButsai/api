@@ -7,6 +7,7 @@ import {
   Delete,
   Get,
   Param,
+  ParseIntPipe,
   Patch,
   Post,
   Query,
@@ -82,7 +83,10 @@ export class IconsSvgController {
   @UseGuards(JwtAuthTokenTypeGuard, RoleGuard)
   @Roles(ERole.ADMIN)
   @Patch(':id')
-  public async updateIcon(@Param('id') id: string, @Body() body: IconsSvgDto) {
+  public async updateIcon(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() body: IconsSvgDto,
+  ) {
     return await this.iconSvgService.updateIcon(id, body);
   }
 
@@ -136,7 +140,7 @@ export class IconsSvgController {
   @UseGuards(JwtAuthTokenTypeGuard, RoleGuard)
   @Roles(ERole.ADMIN)
   @Delete(':id')
-  public async deleteIcon(@Param('id') id: string) {
+  public async deleteIcon(@Param('id', ParseIntPipe) id: number) {
     return await this.iconSvgService.deleteIcon(id);
   }
 }

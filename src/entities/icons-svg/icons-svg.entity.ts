@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { MyBaseEntity } from '@utils/base.entity';
+import { MyBaseEntity } from '@src/base/base.entity';
 import { Column, Entity } from 'typeorm';
 import { EColorSchema, ENameContacts, ESample } from './enums/icon-svg.enum';
 
@@ -51,6 +51,6 @@ export class IconsSvgEntity extends MyBaseEntity {
     description: 'Admin id',
     required: true,
   })
-  @Column({ name: 'owner_id', type: 'varchar', nullable: true })
-  ownerId: string;
+  @Column({ name: 'owner_id', type: 'integer', nullable: true })
+  ownerId: number;
 }

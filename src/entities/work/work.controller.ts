@@ -4,6 +4,7 @@ import {
   Controller,
   Delete,
   Param,
+  ParseIntPipe,
   Patch,
   Post,
   Req,
@@ -74,7 +75,10 @@ export class WorkController {
   @ApiInternalServerErrorResponse({ description: 'Server error' })
   @UseGuards(JwtAuthTokenTypeGuard)
   @Patch(':id')
-  public async updateWork(@Param('id') id: string, @Body() body: WorkDto) {
+  public async updateWork(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() body: WorkDto,
+  ) {
     return await this.workService.updateWork(id, body);
   }
 
@@ -99,7 +103,7 @@ export class WorkController {
   @ApiInternalServerErrorResponse({ description: 'Server error' })
   @UseGuards(JwtAuthTokenTypeGuard)
   @Delete(':id')
-  public async deleteWork(@Param('id') id: string) {
+  public async deleteWork(@Param('id', ParseIntPipe) id: number) {
     return await this.workService.deleteWork(id);
   }
 }

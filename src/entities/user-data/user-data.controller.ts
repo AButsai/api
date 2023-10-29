@@ -1,4 +1,4 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Get, Param, ParseIntPipe } from '@nestjs/common';
 import {
   ApiInternalServerErrorResponse,
   ApiNotFoundResponse,
@@ -20,7 +20,7 @@ export class UserDataController {
   @ApiNotFoundResponse({ description: 'Not found' })
   @ApiInternalServerErrorResponse({ description: 'Server error' })
   @Get('profile/:id')
-  public async getUserById(@Param('id') id: string) {
+  public async getUserById(@Param('id', ParseIntPipe) id: number) {
     return await this.userDataService.getUserById(id);
   }
 }

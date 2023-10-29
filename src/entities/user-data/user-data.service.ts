@@ -19,7 +19,7 @@ export class UserDataService {
     private readonly iconsSvgRepository: Repository<IconsSvgEntity>,
   ) {}
   // Get user data by id
-  public async getUserById(id: string) {
+  public async getUserById(id: number) {
     const user = await this.userRepository.findOne({
       where: { id },
       relations: ['works', 'educations', 'projects'],

@@ -15,7 +15,7 @@ export class WorkService {
   ) {}
 
   // Create work experience
-  public async createWork(id: string, body: WorkDto) {
+  public async createWork(id: number, body: WorkDto) {
     const user = await this.getUser(id);
     const newWork = this.workRepository.create({
       ...body,
@@ -27,7 +27,7 @@ export class WorkService {
   }
 
   // Update work experience
-  public async updateWork(workId: string, body: WorkDto) {
+  public async updateWork(workId: number, body: WorkDto) {
     const work = await this.workRepository.findOne({ where: { id: workId } });
     if (!work) {
       throw new NotFoundException();
@@ -39,13 +39,13 @@ export class WorkService {
   }
 
   // Delete work experience
-  public async deleteWork(workId: string) {
+  public async deleteWork(workId: number) {
     await this.workRepository.delete(workId);
     return { message: 'Work experience deleted' };
   }
 
   // Get user
-  private async getUser(id: string) {
+  private async getUser(id: number) {
     const user = await this.userRepository.findOne({ where: { id } });
     if (!user) {
       throw new NotFoundException('Not found');

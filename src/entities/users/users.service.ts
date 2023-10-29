@@ -33,7 +33,7 @@ export class UsersService {
 
   // Update user
   public async update(
-    id: string,
+    id: number,
     body: UpdateUserDto | UpdateSampleColorSchemaDto | UpdateConsentOfUseDto,
   ) {
     const user = await this.userRepository.findOne({ where: { id } });

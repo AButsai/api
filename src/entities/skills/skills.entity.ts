@@ -1,6 +1,6 @@
 import { UserEntity } from '@entities/users/users.entity';
 import { ApiProperty } from '@nestjs/swagger';
-import { MyBaseEntity } from '@utils/base.entity';
+import { MyBaseEntity } from '@src/base/base.entity';
 import { Column, Entity, ManyToOne } from 'typeorm';
 
 @Entity('skills')

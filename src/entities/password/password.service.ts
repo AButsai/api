@@ -57,7 +57,7 @@ export class PasswordService {
   }
 
   // Change password
-  public async changePassword(body: ChangePasswordDto, id: string) {
+  public async changePassword(body: ChangePasswordDto, id: number) {
     const user = await this.userRepository.findOne({ where: { id } });
     if (!user) {
       throw new NotFoundException();

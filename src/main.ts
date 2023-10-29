@@ -1,12 +1,9 @@
-import { initializeFirebaseApp } from '@entities/upload/config/firebase.config';
-import { UploadDto } from '@entities/upload/dto/upload.dto';
+import { CloudinaryDto } from '@entities/cloudinary/dto/cloudinary.dto';
 import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import * as cookieParser from 'cookie-parser';
 import { AppModule } from './app.module';
-
-initializeFirebaseApp();
 
 async function bootstrap() {
   const PORT = process.env.PORT || 3000;
@@ -20,7 +17,7 @@ async function bootstrap() {
     .build();
 
   const document = SwaggerModule.createDocument(app, config, {
-    extraModels: [UploadDto],
+    extraModels: [CloudinaryDto],
   });
   SwaggerModule.setup('/api/docs', app, document);
 
