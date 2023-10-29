@@ -1,4 +1,5 @@
 export enum EUploadPath {
-  FILES = 'files',
+  EDUCATION = 'educations',
+  PROJECT = 'projects',
   AVATARS = 'avatars',
 }
