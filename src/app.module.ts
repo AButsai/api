@@ -1,5 +1,6 @@
 import { TypeOrmModule } from '@db/typeorm.config';
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
+import { APP_FILTER } from '@nestjs/core';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { AdminModule } from './entities/admin/admin.module';
@@ -17,6 +18,8 @@ import { TokensModule } from './entities/tokens/tokens.module';
 import { UserDataModule } from './entities/user-data/user-data.module';
 import { UsersModule } from './entities/users/users.module';
 import { WorkModule } from './entities/work/work.module';
+import { GlobalExceptionFilter } from './logger/global-exception-filter';
+import { GlobalLoggerService } from './logger/global-logger.service';
 import { CorsMiddleware } from './middleware/cors-middleware';
 
 @Module({
@@ -43,7 +46,13 @@ import { CorsMiddleware } from './middleware/cors-middleware';
     CloudinaryModule,
   ],
   controllers: [],
-  providers: [],
+  providers: [
+    {
+      provide: APP_FILTER,
+      useClass: GlobalExceptionFilter,
+    },
+    GlobalLoggerService,
+  ],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
