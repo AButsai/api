@@ -42,26 +42,6 @@ export class CloudinaryService {
     throw new BadRequestException('Invalid folder name');
   }
 
-  // Update Avatar
-  public async updateAvatar(id: number, file: Express.Multer.File) {
-    // const user = await this.userRepository.findOne({ where: { id } });
-    // if (!user) {
-    //   throw new NotFoundException('User not found');
-    // }
-    // const avatarId = user.avatarPublicId;
-    // try {
-    //   const response = await cloudinary.uploader.destroy(avatarId, {
-    //     invalidate: true,
-    //   });
-    //   if (response.result === 'ok') {
-    //     await this.uploadImage(user.id, file, 'avatars');
-    //   }
-    //   return { message: 'Avatar updated' };
-    // } catch (error) {
-    //   throw new Error(error.message);
-    // }
-  }
-
   // Upload avatar
   private async uploadAvatar(
     id: number,
@@ -71,6 +51,9 @@ export class CloudinaryService {
     const user = await this.userRepository.findOne({ where: { id } });
     if (!user) {
       throw new NotFoundException('User not found');
+    }
+    if (user.avatarPublicId) {
+      await this.deleteImgById(user.avatarPublicId);
     }
     const responseCloudinary = await this.uploadFile(folder, file);
     user.avatarURL = responseCloudinary.url;
@@ -86,8 +69,18 @@ export class CloudinaryService {
     file: Express.Multer.File,
     folder: string,
   ) {
+    const project = await this.projectRepository.findOne({ where: { id } });
+    if (!project) {
+      throw new NotFoundException('Project not found');
+    }
+    if (project.publicImageId) {
+      await this.deleteImgById(project.publicImageId);
+    }
     const responseCloudinary = await this.uploadFile(folder, file);
-    return responseCloudinary;
+    project.imageUrl = responseCloudinary.url;
+    project.publicImageId = responseCloudinary.public_id;
+    await this.projectRepository.save(project);
+    return { message: 'Images uploaded' };
   }
 
   // Upload education images
@@ -96,8 +89,18 @@ export class CloudinaryService {
     file: Express.Multer.File,
     folder: string,
   ) {
+    const education = await this.educationRepository.findOne({ where: { id } });
+    if (!education) {
+      throw new NotFoundException('Project not found');
+    }
+    if (education.publicImageId) {
+      await this.deleteImgById(education.publicImageId);
+    }
     const responseCloudinary = await this.uploadFile(folder, file);
-    return responseCloudinary;
+    education.imageUrl = responseCloudinary.url;
+    education.publicImageId = responseCloudinary.public_id;
+    await this.projectRepository.save(education);
+    return { message: 'Images uploaded' };
   }
 
   // Upload file to cloudinary
@@ -116,5 +119,16 @@ export class CloudinaryService {
       );
       streamifier.createReadStream(file.buffer).pipe(uploadStream);
     });
+  }
+
+  // Delete image from cloudinary
+  private async deleteImgById(id: string) {
+    try {
+      await cloudinary.uploader.destroy(id, {
+        invalidate: true,
+      });
+    } catch (error) {
+      throw new Error(error.message);
+    }
   }
 }
