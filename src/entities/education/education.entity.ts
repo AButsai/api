@@ -26,7 +26,21 @@ export class EducationEntity extends MyBaseEntity {
 
   @ApiProperty({ example: 'Kyiv, Ukraine', description: 'Address school' })
   @Column({ name: 'address', type: 'varchar', nullable: true })
-  address: string;
+  public address: string;
+
+  @ApiProperty({
+    example: 'http://res.cloudinary.com/.../qemiuqqppytvhykxsqfs.jpg',
+    description: 'Image URL',
+  })
+  @Column({ name: 'image_url', type: 'varchar', nullable: true })
+  public imageUrl: string;
+
+  @ApiProperty({
+    example: 'educations/qemiuqqppytvhykxsqfs',
+    description: 'Education img id',
+  })
+  @Column({ name: 'public_id', type: 'varchar', nullable: true })
+  public publicImageId: string;
 
   @ManyToOne(() => UserEntity, (user) => user.educations, {
     onDelete: 'CASCADE',

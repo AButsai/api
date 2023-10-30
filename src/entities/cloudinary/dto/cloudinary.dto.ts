@@ -10,11 +10,11 @@ export class CloudinaryDto {
 }
 
 export class CloudinaryResponseDto {
-  @ApiProperty({ example: 'Avatar uploaded' })
+  @ApiProperty({ example: 'Images uploaded' })
   message: string;
 }
 
 export class CloudinaryResponseUpdateDto {
-  @ApiProperty({ example: 'Avatar updated' })
+  @ApiProperty({ example: 'Images updated' })
   message: string;
 }

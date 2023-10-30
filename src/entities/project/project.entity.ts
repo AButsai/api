@@ -101,6 +101,20 @@ export class ProjectEntity extends MyBaseEntity {
   @Column({ name: 'technologies', type: 'varchar', nullable: true })
   public technologies: string;
 
+  @ApiProperty({
+    example: 'http://res.cloudinary.com/.../qemiuqqppytvhykxsqfs.jpg',
+    description: 'Image URL',
+  })
+  @Column({ name: 'image_url', type: 'varchar', nullable: true })
+  public imageUrl: string;
+
+  @ApiProperty({
+    example: 'educations/qemiuqqppytvhykxsqfs',
+    description: 'Education img id',
+  })
+  @Column({ name: 'public_id', type: 'varchar', nullable: true })
+  public publicImageId: string;
+
   @ManyToOne(() => UserEntity, (user) => user.projects, { onDelete: 'CASCADE' })
   public user: UserEntity;
 }
