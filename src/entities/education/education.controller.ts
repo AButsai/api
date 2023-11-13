@@ -8,10 +8,15 @@ import {
   Patch,
   Post,
   Req,
+  UploadedFile,
   UseGuards,
+  UseInterceptors,
 } from '@nestjs/common';
+import { FileInterceptor } from '@nestjs/platform-express';
 import {
   ApiBearerAuth,
+  ApiBody,
+  ApiConsumes,
   ApiHeader,
   ApiInternalServerErrorResponse,
   ApiNotFoundResponse,
@@ -20,6 +25,7 @@ import {
   ApiTags,
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
+import { multerConfig } from '@src/configs/multer.config';
 import { MyRequest } from '@src/types/request.interface';
 import { DeleteEducationResponseDto, EducationDto } from './dto/education.dto';
 import { EducationService } from './education.service';
@@ -41,6 +47,11 @@ export class EducationController {
       format: 'Bearer YOUR_TOKEN_HERE',
     },
   })
+  @ApiConsumes('multipart/form-data')
+  @ApiBody({
+    description: 'File to upload',
+    type: EducationDto,
+  })
   @ApiOkResponse({ type: EducationDto })
   @ApiNotFoundResponse({ description: 'Not found' })
   @ApiUnauthorizedResponse({
@@ -50,11 +61,13 @@ export class EducationController {
   @ApiInternalServerErrorResponse({ description: 'Server error' })
   @UseGuards(JwtAuthTokenTypeGuard)
   @Post()
+  @UseInterceptors(FileInterceptor('file', multerConfig))
   public async createEducation(
     @Req() req: MyRequest,
     @Body() body: EducationDto,
+    @UploadedFile() file?: Express.Multer.File,
   ) {
-    return await this.educationService.createEducation(req.user.id, body);
+    return await this.educationService.createEducation(req.user.id, body, file);
   }
 
   // Update education experience
@@ -69,6 +82,11 @@ export class EducationController {
       format: 'Bearer YOUR_TOKEN_HERE',
     },
   })
+  @ApiConsumes('multipart/form-data')
+  @ApiBody({
+    description: 'File to upload',
+    type: EducationDto,
+  })
   @ApiOkResponse({ type: EducationDto })
   @ApiNotFoundResponse({ description: 'Not found' })
   @ApiUnauthorizedResponse({
@@ -78,11 +96,13 @@ export class EducationController {
   @ApiInternalServerErrorResponse({ description: 'Server error' })
   @UseGuards(JwtAuthTokenTypeGuard)
   @Patch(':id')
+  @UseInterceptors(FileInterceptor('file', multerConfig))
   public async updateEducation(
     @Param('id', ParseIntPipe) id: number,
     @Body() body: EducationDto,
+    @UploadedFile() file?: Express.Multer.File,
   ) {
-    return await this.educationService.updateEducation(id, body);
+    return await this.educationService.updateEducation(id, body, file);
   }
 
   // Delete education experience

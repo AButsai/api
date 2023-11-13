@@ -1,6 +1,8 @@
+import { CloudinaryService } from '@entities/cloudinary/cloudinary.service';
 import { TokensService } from '@entities/tokens/tokens.service';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { EUploadPath } from '@src/enums/upload.enum';
 import { Repository } from 'typeorm';
 import {
   UpdateConsentOfUseDto,
@@ -15,6 +17,7 @@ export class UsersService {
     @InjectRepository(UserEntity)
     private readonly userRepository: Repository<UserEntity>,
     private readonly tokensService: TokensService,
+    private readonly cloudinaryService: CloudinaryService,
   ) {}
 
   // Current user
@@ -35,9 +38,26 @@ export class UsersService {
   public async update(
     id: number,
     body: UpdateUserDto | UpdateSampleColorSchemaDto | UpdateConsentOfUseDto,
+    file?: Express.Multer.File,
   ) {
+    let avatarURL: string;
+    let avatarPublicId: string;
     const user = await this.userRepository.findOne({ where: { id } });
-    Object.assign(user, body);
+    if (!user) {
+      throw new NotFoundException('User not found');
+    }
+    if (file !== undefined) {
+      if (user.avatarPublicId) {
+        await this.cloudinaryService.deleteImgById(user.avatarPublicId);
+      }
+      const uploadResponse = await this.cloudinaryService.uploadFile(
+        EUploadPath.AVATARS,
+        file,
+      );
+      avatarURL = uploadResponse.url;
+      avatarPublicId = uploadResponse.public_id;
+    }
+    Object.assign(user, { ...body, avatarURL, avatarPublicId });
     await this.userRepository.save(user);
     return await this.current(user.email);
   }

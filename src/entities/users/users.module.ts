@@ -1,3 +1,4 @@
+import { CloudinaryModule } from '@entities/cloudinary/cloudinary.module';
 import { EducationEntity } from '@entities/education/education.entity';
 import { ProjectEntity } from '@entities/project/project.entity';
 import { TokensModule } from '@entities/tokens/tokens.module';
@@ -20,6 +21,7 @@ import { UsersService } from './users.service';
     ]),
     JwtGuardsModule,
     TokensModule,
+    CloudinaryModule,
   ],
   controllers: [UsersController],
   providers: [UsersService, ConfigService],

@@ -4,6 +4,14 @@ import { IsString, Matches, ValidateIf } from 'class-validator';
 
 export class ProjectDto {
   @ApiProperty({
+    description: 'File to upload',
+    type: 'file',
+    format: 'binary',
+    required: false,
+  })
+  file: Express.Multer.File;
+
+  @ApiProperty({
     example: 'https://github.com/user/my-repository',
     description: 'User GitHub url',
     required: false,

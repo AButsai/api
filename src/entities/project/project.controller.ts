@@ -8,10 +8,15 @@ import {
   Patch,
   Post,
   Req,
+  UploadedFile,
   UseGuards,
+  UseInterceptors,
 } from '@nestjs/common';
+import { FileInterceptor } from '@nestjs/platform-express';
 import {
   ApiBearerAuth,
+  ApiBody,
+  ApiConsumes,
   ApiHeader,
   ApiInternalServerErrorResponse,
   ApiNotFoundResponse,
@@ -20,6 +25,7 @@ import {
   ApiTags,
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
+import { multerConfig } from '@src/configs/multer.config';
 import { MyRequest } from '@src/types/request.interface';
 import { DeleteProjectResponseDto, ProjectDto } from './dto/project.dto';
 import { ProjectService } from './project.service';
@@ -41,6 +47,11 @@ export class ProjectController {
       format: 'Bearer YOUR_TOKEN_HERE',
     },
   })
+  @ApiConsumes('multipart/form-data')
+  @ApiBody({
+    description: 'File to upload',
+    type: ProjectDto,
+  })
   @ApiOkResponse({ type: ProjectDto })
   @ApiNotFoundResponse({ description: 'Not found' })
   @ApiUnauthorizedResponse({
@@ -50,8 +61,13 @@ export class ProjectController {
   @ApiInternalServerErrorResponse({ description: 'Server error' })
   @UseGuards(JwtAuthTokenTypeGuard)
   @Post()
-  public async createProject(@Req() req: MyRequest, @Body() body: ProjectDto) {
-    return await this.projectService.createProject(req.user.id, body);
+  @UseInterceptors(FileInterceptor('file', multerConfig))
+  public async createProject(
+    @Req() req: MyRequest,
+    @Body() body: ProjectDto,
+    @UploadedFile() file?: Express.Multer.File,
+  ) {
+    return await this.projectService.createProject(req.user.id, body, file);
   }
 
   // Update project experience
@@ -66,6 +82,11 @@ export class ProjectController {
       format: 'Bearer YOUR_TOKEN_HERE',
     },
   })
+  @ApiConsumes('multipart/form-data')
+  @ApiBody({
+    description: 'File to upload',
+    type: ProjectDto,
+  })
   @ApiOkResponse({ type: ProjectDto })
   @ApiNotFoundResponse({ description: 'Not found' })
   @ApiUnauthorizedResponse({
@@ -75,11 +96,13 @@ export class ProjectController {
   @ApiInternalServerErrorResponse({ description: 'Server error' })
   @UseGuards(JwtAuthTokenTypeGuard)
   @Patch(':id')
+  @UseInterceptors(FileInterceptor('file', multerConfig))
   public async updateProject(
     @Param('id', ParseIntPipe) id: number,
     @Body() body: ProjectDto,
+    @UploadedFile() file?: Express.Multer.File,
   ) {
-    return await this.projectService.updateProject(id, body);
+    return await this.projectService.updateProject(id, body, file);
   }
 
   // Delete project experience
