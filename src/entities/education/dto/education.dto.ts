@@ -3,6 +3,14 @@ import { IsNotEmpty, IsString } from 'class-validator';
 
 export class EducationDto {
   @ApiProperty({
+    description: 'File to upload',
+    type: 'file',
+    format: 'binary',
+    required: false,
+  })
+  file: Express.Multer.File;
+
+  @ApiProperty({
     example: 'FullStack Developer',
     description: 'Taught the stack',
   })

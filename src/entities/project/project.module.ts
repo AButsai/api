@@ -1,3 +1,4 @@
+import { CloudinaryModule } from '@entities/cloudinary/cloudinary.module';
 import { UserEntity } from '@entities/users/users.entity';
 import { JwtGuardsModule } from '@guards/jwtGuard/jwt-auth.module';
 import { Module } from '@nestjs/common';
@@ -11,6 +12,7 @@ import { ProjectService } from './project.service';
   imports: [
     TypeOrmModule.forFeature([UserEntity, ProjectEntity]),
     JwtGuardsModule,
+    CloudinaryModule,
   ],
   controllers: [ProjectController],
   providers: [ProjectService, ConfigService],

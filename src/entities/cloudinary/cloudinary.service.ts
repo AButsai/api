@@ -10,7 +10,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { v2 as cloudinary } from 'cloudinary';
 import * as streamifier from 'streamifier';
 import { Repository } from 'typeorm';
-import { EUploadPath } from './enums/upload.enum';
+import { EUploadPath } from '../../enums/upload.enum';
 import { CloudinaryResponse } from './types/cloudinary-response';
 
 @Injectable()
@@ -104,7 +104,7 @@ export class CloudinaryService {
   }
 
   // Upload file to cloudinary
-  private async uploadFile(folder: string, file: Express.Multer.File) {
+  public async uploadFile(folder: string, file: Express.Multer.File) {
     return await new Promise<CloudinaryResponse>((res, rej) => {
       if (!file || !file.buffer) {
         rej(new Error('Invalid file data'));
@@ -122,7 +122,7 @@ export class CloudinaryService {
   }
 
   // Delete image from cloudinary
-  private async deleteImgById(id: string) {
+  public async deleteImgById(id: string) {
     try {
       await cloudinary.uploader.destroy(id, {
         invalidate: true,

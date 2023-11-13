@@ -1,7 +1,19 @@
 import { JwtAuthTokenTypeGuard } from '@guards/jwtGuard/jwt-auth-token-type.guard';
-import { Body, Controller, Get, Patch, Req, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Patch,
+  Req,
+  UploadedFile,
+  UseGuards,
+  UseInterceptors,
+} from '@nestjs/common';
+import { FileInterceptor } from '@nestjs/platform-express';
 import {
   ApiBearerAuth,
+  ApiBody,
+  ApiConsumes,
   ApiHeader,
   ApiInternalServerErrorResponse,
   ApiNotFoundResponse,
@@ -10,11 +22,12 @@ import {
   ApiTags,
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
+import { multerConfig } from '@src/configs/multer.config';
 import { MyRequest } from '@src/types/request.interface';
 import {
   ResponseDto,
-  UpdateSampleColorSchemaDto,
   UpdateConsentOfUseDto,
+  UpdateSampleColorSchemaDto,
   UpdateUserDto,
   UserResponseDto,
 } from './dto/users.dto';
@@ -69,6 +82,11 @@ export class UsersController {
       format: 'Bearer YOUR_TOKEN_HERE',
     },
   })
+  @ApiConsumes('multipart/form-data')
+  @ApiBody({
+    description: 'File to upload',
+    type: UpdateUserDto,
+  })
   @ApiResponse({ status: 200, type: UserResponseDto })
   @ApiNotFoundResponse({ description: 'Not found' })
   @ApiUnauthorizedResponse({
@@ -78,8 +96,13 @@ export class UsersController {
   @ApiInternalServerErrorResponse({ description: 'Server error' })
   @UseGuards(JwtAuthTokenTypeGuard)
   @Patch('update')
-  public async updateUser(@Req() req: MyRequest, @Body() body: UpdateUserDto) {
-    const { user } = await this.userService.update(req.user.id, body);
+  @UseInterceptors(FileInterceptor('file', multerConfig))
+  public async updateUser(
+    @Req() req: MyRequest,
+    @Body() body: UpdateUserDto,
+    @UploadedFile() file: Express.Multer.File,
+  ) {
+    const { user } = await this.userService.update(req.user.id, body, file);
     return {
       user,
     };

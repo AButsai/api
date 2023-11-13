@@ -5,7 +5,6 @@ import { JwtGuardsModule } from '@guards/jwtGuard/jwt-auth.module';
 import { Module } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { CloudinaryController } from './cloudinary.controller';
 import { CloudinaryProvider } from './cloudinary.provider';
 import { CloudinaryService } from './cloudinary.service';
 
@@ -14,7 +13,6 @@ import { CloudinaryService } from './cloudinary.service';
     TypeOrmModule.forFeature([UserEntity, ProjectEntity, EducationEntity]),
     JwtGuardsModule,
   ],
-  controllers: [CloudinaryController],
   providers: [CloudinaryService, CloudinaryProvider, ConfigService],
   exports: [CloudinaryService],
 })

@@ -13,12 +13,23 @@ import {
 } from 'class-validator';
 
 export class UpdateUserDto {
+  @ApiProperty({
+    description: 'File to upload',
+    type: 'file',
+    format: 'binary',
+  })
+  file: Express.Multer.File;
+
   @ApiProperty({ example: 'Mark', description: 'User First name' })
   @IsNotEmpty()
   @IsString()
   firstName: string;
 
-  @ApiProperty({ example: 'Павло', description: 'User First name' })
+  @ApiProperty({
+    example: 'Павло',
+    description: 'User First name',
+    required: false,
+  })
   @ValidateIf((object, value) => value !== undefined && value !== '')
   @IsString()
   firstName_ua: string;
@@ -28,7 +39,11 @@ export class UpdateUserDto {
   @IsString()
   lastName: string;
 
-  @ApiProperty({ example: 'Наливайко', description: 'User Last name' })
+  @ApiProperty({
+    example: 'Наливайко',
+    description: 'User Last name',
+    required: false,
+  })
   @ValidateIf((object, value) => value !== undefined && value !== '')
   @IsString()
   lastName_ua: string;
@@ -44,7 +59,7 @@ export class UpdateUserDto {
   @ApiProperty({
     example: 'https://drive.google.com/drive/u/0/my-drive',
     description: 'Resume url',
-    required: true,
+    required: false,
   })
   @ValidateIf((object, value) => value !== undefined && value !== '')
   @Matches(regex.linkRegex, {
@@ -63,6 +78,8 @@ export class UpdateUserDto {
   @ApiProperty({
     example: 'Я FullStack разробник...',
     description: 'Position user',
+
+    required: false,
   })
   @ValidateIf((object, value) => value !== undefined && value !== '')
   @IsString()
@@ -71,6 +88,7 @@ export class UpdateUserDto {
   @ApiProperty({
     example: 'https://t.me/name',
     description: 'User Telegram contact',
+    required: false,
   })
   @ValidateIf((object, value) => value !== undefined && value !== '')
   @Matches(regex.telegramRegex, {
@@ -81,7 +99,7 @@ export class UpdateUserDto {
   @ApiProperty({
     example: 'https://www.linkedin.com/in/user/',
     description: 'User linkedin url',
-    required: true,
+    required: false,
   })
   @ValidateIf((object, value) => value !== undefined && value !== '')
   @Matches(regex.linkRegex, {
@@ -92,7 +110,7 @@ export class UpdateUserDto {
   @ApiProperty({
     example: 'https://github.com/user',
     description: 'User gitHub url',
-    required: true,
+    required: false,
   })
   @ValidateIf((object, value) => value !== undefined && value !== '')
   @IsString()
@@ -104,7 +122,7 @@ export class UpdateUserDto {
   @ApiProperty({
     example: 'https://www.facebook.com/profile.php',
     description: 'User facebook url',
-    required: true,
+    required: false,
   })
   @ValidateIf((object, value) => value !== undefined && value !== '')
   @Matches(regex.linkRegex, {
@@ -116,7 +134,7 @@ export class UpdateUserDto {
   @ApiProperty({
     example: 'https://www.instagram.com',
     description: 'User instagram url',
-    required: true,
+    required: false,
   })
   @ValidateIf((object, value) => value !== undefined && value !== '')
   @Matches(regex.linkRegex, {
@@ -125,7 +143,11 @@ export class UpdateUserDto {
   @IsString()
   public instagram: string;
 
-  @ApiProperty({ example: '+380999999999', description: 'User contact viber' })
+  @ApiProperty({
+    example: '+380999999999',
+    description: 'User contact viber',
+    required: false,
+  })
   @ValidateIf((object, value) => value !== undefined && value !== '')
   @Matches(regex.phoneRegex, {
     message: 'Contact phone must be in the format "+380999999999"',
@@ -136,6 +158,7 @@ export class UpdateUserDto {
   @ApiProperty({
     example: '+380999999999',
     description: 'User contact whatsapp',
+    required: false,
   })
   @ValidateIf((object, value) => value !== undefined && value !== '')
   @Matches(regex.phoneRegex, {
@@ -185,10 +208,10 @@ export class UpdateConsentOfUseDto {
 
 export class UserResponseDto extends UpdateUserDto {
   @ApiProperty({
-    example: '29be42a1-5318-4535-bd85-f7e34cc03acb',
+    example: 1,
     description: 'User id',
   })
-  public id: string;
+  public id: number;
 
   @ApiProperty({ example: false, description: 'User agreement' })
   public userAgreement: boolean;
