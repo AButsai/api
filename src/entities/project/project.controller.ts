@@ -126,7 +126,10 @@ export class ProjectController {
   @ApiInternalServerErrorResponse({ description: 'Server error' })
   @UseGuards(JwtAuthTokenTypeGuard)
   @Delete(':id')
-  public async deleteProject(@Param('id', ParseIntPipe) id: number) {
-    return await this.projectService.deleteProject(id);
+  public async deleteProject(
+    @Param('id', ParseIntPipe) id: number,
+    @Req() req: MyRequest,
+  ) {
+    return await this.projectService.deleteProject(req.user.id, id);
   }
 }

@@ -65,7 +65,14 @@ export class ProjectService {
   }
 
   // Delete project experience
-  public async deleteProject(id: number) {
+  public async deleteProject(userId: number, id: number) {
+    const user = await this.userRepository.findOne({ where: { id: userId } });
+    if (!user) {
+      throw new NotFoundException('User not found');
+    }
+    if (user.avatarPublicId) {
+      await this.cloudinaryService.deleteImgById(user.avatarPublicId);
+    }
     await this.projectRepository.delete(id);
     return { message: 'Project experience deleted' };
   }
