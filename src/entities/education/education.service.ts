@@ -64,7 +64,14 @@ export class EducationService {
   }
 
   // Delete education experience
-  public async deleteEducation(id: number) {
+  public async deleteEducation(userId: number, id: number) {
+    const user = await this.userRepository.findOne({ where: { id: userId } });
+    if (!user) {
+      throw new NotFoundException('User not found');
+    }
+    if (user.avatarPublicId) {
+      await this.cloudinaryService.deleteImgById(user.avatarPublicId);
+    }
     await this.educationRepository.delete(id);
     return { message: 'Education deleted' };
   }

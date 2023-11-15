@@ -126,7 +126,10 @@ export class EducationController {
   @ApiInternalServerErrorResponse({ description: 'Server error' })
   @UseGuards(JwtAuthTokenTypeGuard)
   @Delete(':id')
-  public async deleteEducation(@Param('id', ParseIntPipe) id: number) {
-    return await this.educationService.deleteEducation(id);
+  public async deleteEducation(
+    @Param('id', ParseIntPipe) id: number,
+    @Req() req: MyRequest,
+  ) {
+    return await this.educationService.deleteEducation(req.user.id, id);
   }
 }
