@@ -158,7 +158,6 @@ export class UserEntity extends MyBaseEntity {
 
   @ApiProperty({ example: '+380999999999', description: 'User contact phone' })
   @Column({ name: 'phone', type: 'varchar', nullable: true })
-  @Unique(['phone'])
   @ValidateIf((object, value) => value !== undefined && value !== '')
   @Matches(regex.phoneRegex, {
     message: 'Contact phone must be in the format "+380999999999" phone',
@@ -226,7 +225,6 @@ export class UserEntity extends MyBaseEntity {
 
   @ApiProperty({ example: '+380999999999', description: 'User contact viber' })
   @Column({ name: 'viber', type: 'varchar', nullable: true })
-  @Unique(['viber'])
   @ValidateIf((object, value) => value !== undefined && value !== '')
   @Matches(regex.phoneRegex, {
     message: 'Contact phone must be in the format "+380999999999" viber',
@@ -238,7 +236,6 @@ export class UserEntity extends MyBaseEntity {
     description: 'User contact whatsapp',
   })
   @Column({ name: 'whatsapp', type: 'varchar', nullable: true })
-  @Unique(['whatsapp'])
   @ValidateIf((object, value) => value !== undefined && value !== '')
   @Matches(regex.phoneRegex, {
     message: 'Contact phone must be in the format "+380999999999" whatsapp',
