@@ -38,7 +38,7 @@ export class GlobalExceptionFilter implements ExceptionFilter {
         `Request payload: ${JSON.stringify(ctx.getRequest().body)}`,
       );
     } else {
-      errorMessage = { statusCode: status, message: 'Internal Server Error' };
+      errorMessage = { statusCode: status, message: errorMessage };
     }
 
     this.logger.error(
