@@ -20,38 +20,43 @@ export class GlobalExceptionFilter implements ExceptionFilter {
         ? exception.getStatus()
         : HttpStatus.INTERNAL_SERVER_ERROR;
 
-    let errorMessage =
-      exception instanceof HttpException ? exception.getResponse() : null;
+    let errorMessage: any;
 
-    if (errorMessage && typeof errorMessage === 'object') {
+    if (exception instanceof HttpException) {
+      errorMessage = exception.getResponse();
+
+      if (typeof errorMessage === 'object') {
+        errorMessage = {
+          ...errorMessage,
+          statusCode: status,
+        };
+
+        this.logger.log(
+          `Received request: ${ctx.getRequest().method} ${
+            ctx.getRequest().originalUrl
+          } ${ctx.getRequest().ip}`,
+        );
+        this.logger.log(
+          `Request payload: ${JSON.stringify(ctx.getRequest().body)}`,
+        );
+      }
+    } else {
       errorMessage = {
-        ...errorMessage,
         statusCode: status,
+        message: exception.message || 'Internal Server Error',
+        trace: exception.stack || null,
+        timestamp: new Date().toISOString(),
+        context: 'GlobalExceptionFilter',
+        level: 'error',
       };
 
-      this.logger.log(
-        `Received request: ${ctx.getRequest().method} ${
-          ctx.getRequest().originalUrl
-        } ${ctx.getRequest().ip}`,
+      this.logger.error(
+        errorMessage.message,
+        exception.stack,
+        errorMessage.context,
       );
-      this.logger.log(
-        `Request payload: ${JSON.stringify(ctx.getRequest().body)}`,
-      );
-    } else {
-      errorMessage = { statusCode: status, message: errorMessage };
     }
 
-    this.logger.error(
-      (errorMessage as { message: string }).message || 'Internal Server Error',
-      exception.stack,
-      'GlobalExceptionFilter',
-    );
-
-    response.status(status).json(
-      errorMessage || {
-        statusCode: status,
-        message: 'Internal Server Error',
-      },
-    );
+    response.status(status).json(errorMessage);
   }
 }
