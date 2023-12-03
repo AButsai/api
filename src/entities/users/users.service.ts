@@ -57,7 +57,8 @@ export class UsersService {
       avatarURL = uploadResponse.url;
       avatarPublicId = uploadResponse.public_id;
     }
-    Object.assign(user, { ...body, avatarURL, avatarPublicId });
+    const siteResume = `${process.env.SITE_CV}/${user.id}`;
+    Object.assign(user, { ...body, avatarURL, avatarPublicId, siteResume });
     await this.userRepository.save(user);
     return await this.current(user.email);
   }
