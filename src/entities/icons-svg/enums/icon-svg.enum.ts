@@ -11,7 +11,9 @@ export enum ENameContacts {
 }
 
 export enum EColorSchema {
-  DEFAULT = 'default',
+  FIRST = "grey",
+  SECOND = "green",
+  THREE = "blue",
 }
 
 export enum ESample {
