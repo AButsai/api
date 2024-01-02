@@ -2,175 +2,180 @@ import { ApiProperty } from '@nestjs/swagger';
 
 class ContactDataDto {
   @ApiProperty()
-  id: string;
+  public id: string;
 
   @ApiProperty()
-  name: string;
+  public name: string;
 
   @ApiProperty()
-  link: string;
+  public link: string;
 
   @ApiProperty()
-  svg: string;
+  public svg: string;
 }
 
 class WorkDataDto {
   @ApiProperty()
-  id: string;
+  public id: string;
 
   @ApiProperty()
-  createAt: string;
+  public createAt: string;
 
   @ApiProperty()
-  updateAt: string;
+  public updateAt: string;
 
   @ApiProperty()
-  position: string;
+  public position: string;
 
   @ApiProperty()
-  companyName: string;
+  public companyName: string;
 
   @ApiProperty()
-  startDate: string;
+  public startDate: string;
 
   @ApiProperty()
-  endDate: string;
+  public endDate: string;
 
   @ApiProperty()
-  descriptionWork: string;
+  public descriptionWork: string;
 
   @ApiProperty()
-  descriptionWork_ua: string;
+  public descriptionWork_ua: string;
 
   @ApiProperty()
-  technologies: string;
+  public technologies: string;
 }
 
 class EducationDataDto {
   @ApiProperty()
-  id: string;
+  public id: string;
 
   @ApiProperty()
-  createAt: string;
+  public createAt: string;
 
   @ApiProperty()
-  updateAt: string;
+  public updateAt: string;
 
   @ApiProperty()
-  position: string;
+  public position: string;
 
   @ApiProperty()
-  schoolName: string;
+  public schoolName: string;
 
   @ApiProperty()
-  startDate: string;
+  public startDate: string;
 
   @ApiProperty()
-  endDate: string;
+  public endDate: string;
 
   @ApiProperty()
-  address: string;
+  public address: string;
 }
 
 class ProjectDataDto {
   @ApiProperty()
-  id: string;
+  public id: string;
 
   @ApiProperty()
-  createAt: string;
+  public createAt: string;
 
   @ApiProperty()
-  updateAt: string;
+  public updateAt: string;
 
   @ApiProperty()
-  gitHubLink: string;
+  public gitHubLink: string;
 
   @ApiProperty()
-  gitHubNameLink: string;
+  public gitHubNameLink: string;
 
   @ApiProperty()
-  documentationLink: string;
+  public documentationLink: string;
 
   @ApiProperty()
-  projectLink: string;
+  public projectLink: string;
 
   @ApiProperty()
-  projectNameLink: string;
+  public projectNameLink: string;
 
   @ApiProperty()
-  description: string;
+  public description: string;
 
   @ApiProperty()
-  description_ua: string;
+  public description_ua: string;
 
   @ApiProperty()
-  technologies: string;
+  public technologies: string;
+}
+
+class SkillsDataDto {
+  @ApiProperty()
+  public techSkills: string[];
+
+  @ApiProperty()
+  public softSkills: string[];
+
+  @ApiProperty()
+  public languageSkills: string[];
 }
 
 export class UserDataResponseDto {
   @ApiProperty()
-  id: string;
+  public id: string;
 
   @ApiProperty()
-  avatarURL: string;
+  public avatarURL: string;
 
   @ApiProperty()
-  firstName: string;
+  public firstName: string;
 
   @ApiProperty()
-  firstName_ua: string;
+  public firstName_ua: string;
 
   @ApiProperty()
-  lastName: string;
+  public lastName: string;
 
   @ApiProperty()
-  lastName_ua: string;
+  public lastName_ua: string;
 
   @ApiProperty()
-  position: string;
+  public position: string;
 
   @ApiProperty()
-  aboutMe: string;
+  public aboutMe: string;
 
   @ApiProperty()
-  aboutMe_ua: string;
+  public aboutMe_ua: string;
 
   @ApiProperty()
-  englishLevel: string;
+  public sample: string;
 
   @ApiProperty()
-  ukraineLangue: string;
+  public colorSchema: string;
 
   @ApiProperty()
-  russianLangue: string;
+  public verified: boolean;
 
   @ApiProperty()
-  sample: string;
+  public siteResume: string;
 
   @ApiProperty()
-  colorSchema: string;
-
-  @ApiProperty()
-  verified: boolean;
-
-  @ApiProperty()
-  siteResume: string;
-
-  @ApiProperty()
-  resume: string;
+  public resume: string;
 
   @ApiProperty()
   public userAgreement: boolean;
 
   @ApiProperty({ type: [ContactDataDto] })
-  contacts: ContactDataDto[];
+  public contacts: ContactDataDto[];
+
+  @ApiProperty({ type: [SkillsDataDto] })
+  public skills: SkillsDataDto[];
 
   @ApiProperty({ type: [WorkDataDto] })
-  works: WorkDataDto[];
+  public works: WorkDataDto[];
 
   @ApiProperty({ type: [EducationDataDto] })
-  educations: EducationDataDto[];
+  public educations: EducationDataDto[];
 
   @ApiProperty({ type: [ProjectDataDto] })
-  projects: ProjectDataDto[];
+  public projects: ProjectDataDto[];
 }

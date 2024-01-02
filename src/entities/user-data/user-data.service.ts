@@ -40,15 +40,11 @@ export class UserDataService {
       position: user.position,
       aboutMe: user.aboutMe,
       aboutMe_ua: user.aboutMe_ua,
-      englishLevel: user.englishLevel,
-      ukraineLangue: user.ukraineLangue,
-      russianLangue: user.russianLangue,
       sample: user.sample,
       colorSchema: user.colorSchema,
       verified: user.verified,
       siteResume: user.siteResume,
       resume: user.resume,
-
       contacts: [
         {
           id: v4(),
@@ -105,7 +101,7 @@ export class UserDataService {
           svg: await this.getIcon(ENameContacts.WATS_UP, sample, colorSchema),
         },
       ],
-
+      skills: user.skills,
       works: user.works,
       educations: user.educations,
       projects: user.projects,
