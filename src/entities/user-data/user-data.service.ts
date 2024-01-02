@@ -107,7 +107,7 @@ export class UserDataService {
       projects: user.projects,
     };
 
-    return { user: userData };
+    return userData;
   }
 
   // Get icon
