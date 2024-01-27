@@ -158,6 +158,9 @@ export class UserDataResponseDto {
   @ApiProperty({ type: [ContactDataDto] })
   public contacts: ContactDataDto[];
 
+  @ApiProperty({ type: [SkillsDataDto] })
+  public skills: SkillsDataDto[];
+
   @ApiProperty({ type: [ContactDataDto] })
   public social: ContactDataDto[];
 
