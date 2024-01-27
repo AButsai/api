@@ -48,7 +48,6 @@ export class UserDataService {
       verified: user.verified,
       siteResume: user.siteResume,
       resume: user.resume,
-
       contacts: [
         {
           id: v4(),
@@ -62,6 +61,26 @@ export class UserDataService {
           link: `tel:${user.phone}`,
           svg: await this.getIcon(ENameContacts.PHONE, sample, colorSchema),
         },
+        {
+          id: v4(),
+          name: 'Telegram',
+          link: user.telegram,
+          svg: await this.getIcon(ENameContacts.TELEGRAM, sample, colorSchema),
+        },
+        {
+          id: v4(),
+          name: 'Viber',
+          link: user.viber,
+          svg: await this.getIcon(ENameContacts.VIBER, sample, colorSchema),
+        },
+        {
+          id: v4(),
+          name: 'WhatsApp',
+          link: user.whatsapp,
+          svg: await this.getIcon(ENameContacts.WATS_UP, sample, colorSchema),
+        },
+      ],
+      social: [
         {
           id: v4(),
           name: 'Instagram',
@@ -85,24 +104,6 @@ export class UserDataService {
           name: 'Facebook',
           link: user.facebook,
           svg: await this.getIcon(ENameContacts.FACEBOOK, sample, colorSchema),
-        },
-        {
-          id: v4(),
-          name: 'Telegram',
-          link: user.telegram,
-          svg: await this.getIcon(ENameContacts.TELEGRAM, sample, colorSchema),
-        },
-        {
-          id: v4(),
-          name: 'Viber',
-          link: user.viber,
-          svg: await this.getIcon(ENameContacts.VIBER, sample, colorSchema),
-        },
-        {
-          id: v4(),
-          name: 'WhatsApp',
-          link: user.whatsapp,
-          svg: await this.getIcon(ENameContacts.WATS_UP, sample, colorSchema),
         },
       ],
 
