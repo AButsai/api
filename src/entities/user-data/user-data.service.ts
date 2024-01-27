@@ -22,7 +22,7 @@ export class UserDataService {
   public async getUserById(id: number) {
     const user = await this.userRepository.findOne({
       where: { id },
-      relations: ['works', 'educations', 'projects'],
+      relations: ['works', 'educations', 'projects', 'skills'],
     });
     if (!user) {
       throw new NotFoundException('User not found');
@@ -40,9 +40,6 @@ export class UserDataService {
       position: user.position,
       aboutMe: user.aboutMe,
       aboutMe_ua: user.aboutMe_ua,
-      englishLevel: user.englishLevel,
-      ukraineLangue: user.ukraineLangue,
-      russianLangue: user.russianLangue,
       sample: user.sample,
       colorSchema: user.colorSchema,
       verified: user.verified,
@@ -106,13 +103,13 @@ export class UserDataService {
           svg: await this.getIcon(ENameContacts.FACEBOOK, sample, colorSchema),
         },
       ],
-
+      skills: user.skills,
       works: user.works,
       educations: user.educations,
       projects: user.projects,
     };
 
-    return { user: userData };
+    return userData;
   }
 
   // Get icon

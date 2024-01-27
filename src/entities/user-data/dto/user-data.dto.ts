@@ -107,7 +107,7 @@ class ProjectDataDto {
   public technologies: string;
 }
 
-export class UserDataResponseDto {
+class SkillsDataDto {
   @ApiProperty()
   public id: string;
 
@@ -116,7 +116,9 @@ export class UserDataResponseDto {
 
   @ApiProperty()
   public firstName: string;
+}
 
+export class UserDataResponseDto {
   @ApiProperty()
   public firstName_ua: string;
 
